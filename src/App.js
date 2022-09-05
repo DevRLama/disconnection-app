@@ -1,25 +1,49 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react'
+
+import 'bootstrap/dist/css/bootstrap.css'
+import SignIn from './components/SignIn'
+import Navbar from './components/Navbar'
+import HomePage from './components/HomePage'
+import Alert from './components/Alert'
+
+
+import { BrowserRouter as Router, Route, Routes, } from "react-router-dom";
+
 
 function App() {
+
+  const [alert, setalert] = useState(null)
+  const showAlert=(message,type)=>{
+    setalert({
+      msg:message,
+      type:type
+    })
+    setTimeout(()=>{
+      setalert(null);
+    },1500)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Navbar title="Disconnection Portal" showAlert={showAlert} />
+        <Alert alert={alert}/>
+        <div className="container mm">
+          <Routes>
+            <Route exact path="/" element={<SignIn showAlert={showAlert} />} />  
+            <Route exact path="/profile" element={<HomePage showAlert={showAlert} />} />
+            
+          </Routes>
+          </div>
+          {/* <div className="card-footer bg-transparent border-success"><FootBar mode={mode} /></div> */}
+      </Router>
+    
+
+
+     
+    </>
   );
 }
 
 export default App;
+
