@@ -3,36 +3,34 @@ import React,{useState} from 'react'
 
 import { useNavigate } from 'react-router-dom';
 
+
 function Login(props) {
     let navigate = useNavigate();
     const [mobileNumber, setmobileNumber] = useState("");
     const [OTP, setOTP] = useState("");
-    let OTP_VAL=""
-    let role=""
+    const [OTP_VAL, setOTP_VAL] = useState("");
+    const [role, setrole] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(mobileNumber==="1234567890")
         {
             document.querySelector("#OTPForm").hidden=false
-            OTP_VAL="1234"
-            role=""
+            setOTP_VAL("1234")
+            setrole("AE")
+            
            
         }else{
             props.showAlert("Not valid User","danger")
             navigate("/")
         }
-       
-
-
-
     }
 
     const handleSignIn=(e)=>{
         e.preventDefault();
-       if(OTP===OTP_VAL && role==="JE"){
-        localStorage.setItem('role',"JE")
-        navigate("/profile")
+       if(OTP===OTP_VAL ){
+        localStorage.setItem('role',role)
+       navigate("/profile")       
         props.showAlert("Succesfully logged in","success")
        }else{
         props.showAlert("Not valid OTP","danger")
@@ -42,6 +40,7 @@ function Login(props) {
     const onChange=()=>{
         setmobileNumber(document.querySelector("#mobileNumber").value)
         setOTP(document.querySelector("#OTP").value)
+        
 
     }
 
