@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import axios from 'axios'
 
 
 import { useNavigate } from 'react-router-dom';
@@ -10,31 +11,52 @@ function Login(props) {
     const [OTP, setOTP] = useState("");
     const [OTP_VAL, setOTP_VAL] = useState("");
     const [role, setrole] = useState("");
+   
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(mobileNumber==="1234567890")
+        // Api hit
+
+        const response = await axios({
+  
+            // Endpoint to send files
+            url: "http://localhost:8080/api/user/getotp",
+            method: "GET",
+            params: {mobileno:mobileNumber
+            }})
+        
+        console.log(response);
+        if(response.data.respCode===1)
         {
             document.querySelector("#OTPForm").hidden=false
-            setOTP_VAL("1234")
-            setrole("AE")
-            
-           
         }else{
-            props.showAlert("Not valid User","danger")
+            props.showAlert(response.respMsg,"danger")
             navigate("/")
         }
+
+        
     }
 
-    const handleSignIn=(e)=>{
+    const handleSignIn= async (e)=>{
         e.preventDefault();
-       if(OTP===OTP_VAL ){
-        localStorage.setItem('role',role)
-       navigate("/profile")       
-        props.showAlert("Succesfully logged in","success")
-       }else{
-        props.showAlert("Not valid OTP","danger")
-       }
+
+        const response = await axios({
+  
+            // Endpoint to send files
+            url: "http://localhost:8080/api/user/verifyotp",
+            method: "GET",
+            params: {otp:OTP,mobileno:mobileNumber
+            }})
+        
+        console.log(response);
+
+    //    if(OTP===OTP_VAL ){
+    //     localStorage.setItem('role',role)
+    //    navigate("/profile")       
+    //     props.showAlert("Succesfully logged in","success")
+    //    }else{
+    //     props.showAlert("Not valid OTP","danger")
+    //    }
     }
     
     const onChange=()=>{
