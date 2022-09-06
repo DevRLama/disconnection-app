@@ -3,6 +3,7 @@ const userMapping = require('../model/UserMapping');
 const express = require('express');
 const User = require('../model/User');
 
+
 const router = express.Router();
 
 router.get('/getotp',async(req,resp)=>{
@@ -35,9 +36,21 @@ router.get('/getotp',async(req,resp)=>{
     
 })
 
-router.post('/verifyotp',(req,resp)=>{
+router.get('/verifyotp',async(req,resp)=>{
+    const userId = req.query.mobileno;
+    const otp = req.query.otp;
     
-})
+    const user = await User.findOne({userId});
+    if(user.otp === otp)
+    {
+        console.log("OTP verified successfully");
+        resp.send({respCode:1, respMsg:"OTP verified successfully"});
+    }
+    else{
+        resp.send({respCode:2, respMsg:"Incorrect OTP"});
+    }
+    
+});
 
 module.exports = router;
 
