@@ -11,6 +11,7 @@ router.get('/getotp', async (req, resp) => {
     const userId = req.query.mobileno;
     console.log(userId);
     if (userId) {
+        
         const user = await User.findOne({ userId });
         //if user exists with given mobile number
         if (user && !(user.isDeleted)) {

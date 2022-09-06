@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 function AddLineman(props) {
 
-    const [userDetail, setuserDetail] = useState({ firstName: "", lastName: "", mobileNo: "", role: "" })
+    const [userDetail, setuserDetail] = useState({ firstName: "", lastName: "", mobileno: "", role: "" })
     let navigate = useNavigate();
 
 
@@ -34,7 +34,7 @@ function AddLineman(props) {
         JSON.stringify({
             firstName: userDetail.firstName,
             lastName: userDetail.lastName,
-            userID: userDetail.mobileNo,
+            mobileno: userDetail.mobileno,
             role: userDetail.role
 
         }), {headers:{'Content-Type':'application/json'}})

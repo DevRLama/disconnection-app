@@ -31,7 +31,7 @@ function SignIn(props) {
         if (response.data.respCode === 1) {
             
             setprofile({ userId: response.data.user.userID, firstName: response.data.user.firstName, lastName: response.data.user.lastName, role: response.data.user.role })
-            document.querySelector("#OTPForm").hidden = false
+            document.querySelector("#OTPForm").hidden = "false"
         } else {
             props.showAlert(response.data.respMsg, "danger")
             navigate("/")   
