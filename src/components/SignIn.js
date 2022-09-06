@@ -5,13 +5,12 @@ import axios from 'axios'
 import { NavLink, useNavigate } from 'react-router-dom';
 
 
-function Login(props) {
+function SignIn(props) {
     let navigate = useNavigate();
     const [profile, setprofile] = useState({ userId: "", firstName: "", lastName: "", role: "" })
     const [mobileNumber, setmobileNumber] = useState("");
     const [OTP, setOTP] = useState("");
-    const [OTP_VAL, setOTP_VAL] = useState("");
-    const [role, setrole] = useState("");
+
 
  
     const handleSubmit = async (e) => {
@@ -103,4 +102,4 @@ return (
 );
 }
 
-export default Login
+export default SignIn

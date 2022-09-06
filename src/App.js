@@ -9,14 +9,11 @@ import Alert from './components/Alert'
 
 
 import { BrowserRouter as Router, Route, Routes, } from "react-router-dom";
-<<<<<<< HEAD
-import Sidebar from './components/Sidebar';
-=======
 import WorkAssign from './components/WorkAssign';
 import AddLineman from './components/AddLineman';
 import DeleteLineman from './components/DeleteLineman';
 import UpdateLineman from './components/UpdateLineman';
->>>>>>> 238b919bef736bb4cb39b610faec4a2e77d73a4a
+
 
 
 function App() {
