@@ -10,6 +10,9 @@ import Alert from './components/Alert'
 
 import { BrowserRouter as Router, Route, Routes, } from "react-router-dom";
 import WorkAssign from './components/WorkAssign';
+import AddLineman from './components/AddLineman';
+import DeleteLineman from './components/DeleteLineman';
+import UpdateLineman from './components/UpdateLineman';
 
 
 function App() {
@@ -34,6 +37,10 @@ function App() {
             <Route exact path="/" element={<SignIn showAlert={showAlert} />} />  
             <Route exact path="/profile" element={<HomePage showAlert={showAlert} />} />
             <Route exact path="/workAssign" element={<WorkAssign showAlert={showAlert} />} />
+            <Route exact path="/addLineman" element={<AddLineman />} />
+            <Route exact path="/deleteLineman" element={<DeleteLineman  />} />
+            <Route exact path="/updateLineman" element={<UpdateLineman  />} />
+
             
           </Routes>
           </div>

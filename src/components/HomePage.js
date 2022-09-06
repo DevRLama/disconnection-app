@@ -1,21 +1,21 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 
-function HomePage() {
+function HomePage(props) {
+
   return (
     <>
 
-     
+
+
+      <h2>Profile Page</h2>
 
 
 
 
+    </>
 
-
-      </>
-
-      )
+  )
 }
 
-      export default HomePage
+export default HomePage
