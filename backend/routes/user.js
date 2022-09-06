@@ -52,6 +52,25 @@ router.get('/verifyotp',async(req,resp)=>{
     
 });
 
+router.get('/deleteuser',async(req,resp)=>{
+    const userId = req.query.mobileno;  
+    const user = await User.findOne({userId});
+   
+    user.isDeleted = true;
+    userDeleteResp = await User.updateOne({userId},{isDeleted:true});
+
+    if(userDeleteResp.acknowledged){
+        
+        console.log(user);
+        resp.send({respCode:1,user:user});
+    } 
+    else{
+        resp.send({respCode:4, respMsg:"Error deleting user"});
+    }    
+    
+    
+})
+
 // router.get('/getuser',async(req,res)=>{
 //     const userId = req.query.mobileno;
 //     const user = await User.findOne({userId});
