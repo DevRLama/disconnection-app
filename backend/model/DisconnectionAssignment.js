@@ -14,11 +14,11 @@ const DisconnectionAssignmentSchema = mongoose.Schema({
         require:true
     },
     AssignedDate: {
-        type: String,
+        type: Date,
         require:true
     },
     CompletionDate: {
-        type: String
+        type: Date
     },
     Remark:{
         type: String
