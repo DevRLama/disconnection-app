@@ -9,6 +9,7 @@ import Alert from './components/Alert'
 
 
 import { BrowserRouter as Router, Route, Routes, } from "react-router-dom";
+import WorkAssign from './components/WorkAssign';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<SignIn showAlert={showAlert} />} />  
             <Route exact path="/profile" element={<HomePage showAlert={showAlert} />} />
+            <Route exact path="/workAssign" element={<WorkAssign showAlert={showAlert} />} />
             
           </Routes>
           </div>
