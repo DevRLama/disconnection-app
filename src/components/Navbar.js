@@ -4,9 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 export default function Navbar(props) {
-  let navigate=useNavigate()
+  let navigate = useNavigate()
 
-  const handleLogOut=(e)=>{
+  const handleLogOut = (e) => {
     e.preventDefault();
     localStorage.removeItem('role')
     navigate("/")
@@ -23,24 +23,31 @@ export default function Navbar(props) {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          
-            
-          {localStorage.getItem('role') ? 
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                <li className="nav-item">
-                  <Link className="nav-item nav-link" aria-current="page" to="/profile">Profile Page</Link>
-                </li>
-                 <li className="nav-item">
-                 <Link className="nav-item nav-link" aria-current="page" to="/workAssign">Work Assign</Link>
-               </li>
-               </ul>
-           
-            
-         :<></>}
 
-        
 
-          
+          {localStorage.getItem('role') ?
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <Link className="nav-item nav-link" aria-current="page" to="/profile">Profile Page</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-item nav-link" aria-current="page" to="/workAssign">Work Assign</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-item nav-link" aria-current="page" to="/addLineman">Add Lineman</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-item nav-link" aria-current="page" to="/deleteLineman">Delete Lineman</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-item nav-link" aria-current="page" to="/updateLineman">Update Lineman</Link>
+              </li>
+            </ul>
+            : <></>}
+
+
+
+
 
 
           {!localStorage.getItem('role') ? <form>
@@ -49,12 +56,12 @@ export default function Navbar(props) {
                 <Link className="nav-item nav-link" aria-current="page" to="/">Sign In</Link>
               </li>
             </ul></form>
-          :
-          <form>
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
-            <h6 className="nav-item nav-link">Welcome : {localStorage.getItem('role')}</h6>
-            <Link className="nav-item nav-link" aria-current="page" to="/" onClick={handleLogOut}>Log Out</Link>
-            </ul></form>
+            :
+            <form>
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
+                <h6 className="nav-item nav-link">Welcome : {localStorage.getItem('role')}</h6>
+                <Link className="nav-item nav-link" aria-current="page" to="/" onClick={handleLogOut}>Log Out</Link>
+              </ul></form>
           }
         </div>
       </div>
