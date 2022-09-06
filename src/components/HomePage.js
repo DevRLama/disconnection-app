@@ -6,10 +6,7 @@ import ProfileData from './ProfileData'
 
 
 function HomePage() {
- 
-
-
-    
+  
 
  
 

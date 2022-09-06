@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-
-
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 function SignIn(props) {
@@ -27,11 +25,12 @@ function SignIn(props) {
             }
         })
 
-        console.log(response);
+        console.log(response)
         if (response.data.respCode === 1) {
             
             setprofile({ userId: response.data.user.userID, firstName: response.data.user.firstName, lastName: response.data.user.lastName, role: response.data.user.role })
-            document.querySelector("#OTPForm").hidden = "false"
+            document.querySelector("#OTPForm").hidden = false
+            console.log("hi")
         } else {
             props.showAlert(response.data.respMsg, "danger")
             navigate("/")   

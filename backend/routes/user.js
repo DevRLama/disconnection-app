@@ -105,6 +105,39 @@ router.post('/create',  async (req, resp) => {
 })
 
 
+//Route: To update data of lineman
+router.post('/update',  async (req, resp) => {
+    [
+        body('mobileno','mobile no is required').exists({checkFalsy: true}),
+        body('firstName','first name is required').exists({checkFalsy: true}),
+        body('lastName','last name is required').exists({checkFalsy: true}),
+      
+    ],
+    console.log(req)
+    //if there are errors, Bad request return
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return resp.send({respCode:2,respMsg:errors.array()})
+    }
+    try{
+        console.log(req.body);
+        let user = await User.findOneAndUpdate(
+            { userId: req.body.mobileno },
+            {
+                $set: {
+                    firstName: req.body.firstName,
+                    lastName:req.body.lastName,
+                    userId:req.body.mobileno
+                }
+            })
+        resp.send({respCode:1, respMsg:"User updated successfully"});
+    }
+    catch(error){
+        console.log(error);
+        resp.send({respCode:4,respMsg:"Error updating user"});
+    }
+})
+
 
 
 
