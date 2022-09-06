@@ -18,6 +18,10 @@ const userSchema = mongoose.Schema({
     },
     otp:{
         type:String,
+    },
+    isDeleted:{
+        type:Boolean,
+        default:false
     }
 })
 
