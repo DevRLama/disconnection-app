@@ -1,27 +1,28 @@
 import React from 'react'
+import axios from 'axios'
+import { useEffect } from 'react'
+import ProfileData from './ProfileData'
 
 
 
 function HomePage() {
-    return (
-        <>
+ 
 
-<div className="container">
+
+    
+
+ 
+
+ 
   
-  <div className="row">
-    <div className="col-8">jfsdfjsldkjfksdfkdjfsdkksdfks</div>
-    <div className="col-4">sfsdfsdfsd</div>
-  </div>
-</div>
-
-        
+  
 
 
-                    
+    return (
+     
 
-
-
-                </>
+     <><h2>User Home page</h2></>
+            
 
                 )
 }
