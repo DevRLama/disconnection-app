@@ -52,5 +52,11 @@ router.get('/verifyotp',async(req,resp)=>{
     
 });
 
+// router.get('/getuser',async(req,res)=>{
+//     const userId = req.query.mobileno;
+//     const user = await User.findOne({userId});
+
+// })
+
 module.exports = router;
 
