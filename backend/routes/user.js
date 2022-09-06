@@ -12,7 +12,7 @@ router.get('/getotp', async (req, resp) => {
     if (userId) {
         const user = await User.findOne({ userId });
         //if user exists with given mobile number
-        if (user) {
+        if (user && !(user.isDeleted)) {
             //create otp and save to database
             const otp = Math.floor(1000 + Math.random() * 9000);
             user.otp = otp;

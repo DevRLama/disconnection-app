@@ -1,21 +1,46 @@
 import React, { useState } from 'react'
+import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
 
 
-function DeleteLineman() {
+function DeleteLineman(props) {
 
-    const[userDetail,setuserDetail]=useState({firstName:"",lastName:"",mobileNo:""})
+   let navigate=useNavigate()
+    const [mobileNumber, setmobileNumber] = useState("");
 
 
-    const handleSubmit=()=>{
+    const handleSubmit=async(e)=>{
 
         //Api Call to create lineman
+        e.preventDefault();
+        // Api hit
+
+        const response = await axios({
+
+            // Endpoint to send files
+            url: "http://localhost:8080/api/user/deleteuser",
+            method: "GET",
+            params: {
+                mobileno: mobileNumber
+            }
+        })
+        if (response.data.respCode === 1) {
+             navigate("/profile")
+             props.showAlert("Succesfully"+ mobileNumber +" Deleted Lineman ", "success")
+         } else {
+             localStorage.removeItem('role')
+             props.showAlert("Not valid OTP", "danger")
+         }
+
+
 
     }
 
 
 
     const onChange = (e) => {
-        setuserDetail({ ...userDetail, [e.target.id]: e.target.value })
+        
+        setmobileNumber(document.querySelector("#mobileNumber").value)
     
     }
 
@@ -29,7 +54,7 @@ function DeleteLineman() {
                 <form onSubmit={handleSubmit}>
                     <div className="form-group my-4">
 
-                        <input type="text" className="form-control" id="mobileNo" aria-describedby="emailHelp" onChange={onChange} placeholder="Mobile Number" required />
+                        <input type="text" className="form-control" id="mobileNumber" aria-describedby="emailHelp" onChange={onChange} placeholder="Mobile Number" required />
                     </div>
                    
                     <button type="submit" className="btn btn-primary" >Submit</button>

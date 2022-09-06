@@ -37,9 +37,9 @@ function App() {
             <Route exact path="/" element={<SignIn showAlert={showAlert} />} />  
             <Route exact path="/profile" element={<HomePage showAlert={showAlert} />} />
             <Route exact path="/workAssign" element={<WorkAssign showAlert={showAlert} />} />
-            <Route exact path="/addLineman" element={<AddLineman />} />
-            <Route exact path="/deleteLineman" element={<DeleteLineman  />} />
-            <Route exact path="/updateLineman" element={<UpdateLineman  />} />
+            <Route exact path="/addLineman" element={<AddLineman showAlert={showAlert} />} />
+            <Route exact path="/deleteLineman" element={<DeleteLineman showAlert={showAlert} />} />
+            <Route exact path="/updateLineman" element={<UpdateLineman showAlert={showAlert} />} />
 
             
           </Routes>
