@@ -52,9 +52,7 @@ export default function Navbar(props) {
 
           {!localStorage.getItem('role') ? <form>
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link className="nav-item nav-link" aria-current="page" to="/">Sign In</Link>
-              </li>
+               <Link className="nav-item nav-link" aria-current="page" to="/">Sign In</Link>              
             </ul></form>
             :
             <form>

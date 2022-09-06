@@ -27,10 +27,10 @@ function DeleteLineman(props) {
         if (response.data.respCode === 1) {
              navigate("/profile")
              props.showAlert("Succesfully"+ mobileNumber +" Deleted Lineman ", "success")
-         } else {
-             localStorage.removeItem('role')
-             props.showAlert("Not valid OTP", "danger")
-         }
+         } else if (response.data.respCode === 3){
+             props.showAlert(response.data.respMsg, "danger")
+         }else{
+           props.showAlert(response.data.respMsg, "danger")}
 
 
 

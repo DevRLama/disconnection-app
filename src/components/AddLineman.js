@@ -6,8 +6,10 @@ import { useNavigate } from 'react-router-dom'
 
 function AddLineman(props) {
 
-    const [userDetail, setuserDetail] = useState({ firstName: "", lastName: "", mobileno: "", role: "" })
+    const [userDetail, setuserDetail] = useState({ firstName: "", lastName: "", mobileno: "" })
+    const [role, setrole] = useState("")
     let navigate = useNavigate();
+   
 
 
     const handleSubmit = async (e) => {
@@ -29,13 +31,14 @@ function AddLineman(props) {
 
         //     })
         // })
-
+      
+        
         const response = await axios.post("http://localhost:8080/api/user/create",
         JSON.stringify({
             firstName: userDetail.firstName,
             lastName: userDetail.lastName,
             mobileno: userDetail.mobileno,
-            role: userDetail.role
+            role:role
 
         }), {headers:{'Content-Type':'application/json'}})
         if (response.data.respCode === 1) {
@@ -52,6 +55,7 @@ function AddLineman(props) {
 
     const onChange = (e) => {
         setuserDetail({ ...userDetail, [e.target.id]: e.target.value })
+        setrole("Lineman")
 
     }
 
@@ -65,20 +69,17 @@ function AddLineman(props) {
                 <form onSubmit={handleSubmit}>
                     <div className="form-group my-4">
 
-                        <input type="text" className="form-control" id="firstName" aria-describedby="emailHelp" onChange={onChange} placeholder="First Name" required />
+                        <input type="text" className="form-control" id="firstName"  onChange={onChange} placeholder="First Name" required />
                     </div>
                     <div className="form-group my-4">
 
-                        <input type="text" className="form-control" id="lastName" aria-describedby="emailHelp" onChange={onChange} placeholder="Last Name" required />
+                        <input type="text" className="form-control" id="lastName"  onChange={onChange} placeholder="Last Name" required />
                     </div>
                     <div className="form-group my-4">
 
-                        <input type="text" className="form-control" id="mobileno" aria-describedby="emailHelp" onChange={onChange} placeholder="Mobile No" required />
+                        <input type="text" className="form-control" id="mobileno"  onChange={onChange} placeholder="Mobile No" required />
                     </div>
-                    <div className="form-group my-4">
-
-                        <input type="text" className="form-control" id="role" aria-describedby="emailHelp" value="lineman" placeholder="Mobile No" required hidden="true" />
-                    </div>
+                    
                     <button type="submit" className="btn btn-primary" >Submit</button>
                 </form>
 

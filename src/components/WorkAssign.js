@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+
 
 
 function WorkAssign() {
@@ -45,7 +45,7 @@ function WorkAssign() {
                             <th scope="row">{i}</th>
                             <td>
                                 <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                <label className="form-check-label" for="flexCheckDefault">
+                                <label className="form-check-label" htmlFor="flexCheckDefault">
 
                                 </label>
                             </td>
