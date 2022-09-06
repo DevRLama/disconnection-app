@@ -4,6 +4,7 @@ const express = require('express');
 const User = require('../model/User');
 const { body, validationResult } = require('express-validator');
 
+
 const router = express.Router();
 
 router.get('/getotp', async (req, resp) => {
@@ -70,18 +71,18 @@ router.get('/deleteuser',async(req,resp)=>{
 })
 
 router.post('/create',  async (req, resp) => {
-    // [
-    //     body('mobileno','mobile no is required').exists({checkFalsy: true}),
-    //     body('firstName','first name is required').exists({checkFalsy: true}),
-    //     body('lastName','last name is required').exists({checkFalsy: true}),
-    //     body('role', 'role is required').exists({checkFalsy: true})
-    // ],
-    //console.log(req)
+    [
+        body('mobileno','mobile no is required').exists({checkFalsy: true}),
+        body('firstName','first name is required').exists({checkFalsy: true}),
+        body('lastName','last name is required').exists({checkFalsy: true}),
+        body('role', 'role is required').exists({checkFalsy: true})
+    ],
+    console.log(req)
     //if there are errors, Bad request return
-    // const errors = validationResult(req);
-    // if (!errors.isEmpty()) {
-    //     return resp.send({respCode:2,respMsg:errors.array()})
-    // }
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return resp.send({respCode:2,respMsg:errors.array()})
+    }
     try{
         console.log(req.body);
         let user = await User.findOne({ userId: req.body.mobileno })
@@ -101,6 +102,8 @@ router.post('/create',  async (req, resp) => {
         resp.send({respCode:4,respMsg:"Error creating user"});
     }
 })
+
+
 
 module.exports = router;
 

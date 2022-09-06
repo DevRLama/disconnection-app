@@ -6,6 +6,7 @@ const app = express();
 const PORT = 8080;
 
 app.use(cors());
+app.use(express.json())
 
 //Available routes
 app.use('/api/user',require('./routes/user'))
