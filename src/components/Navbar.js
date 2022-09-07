@@ -44,7 +44,7 @@ export default function Navbar(props) {
                 </div>
               </li>
             </ul>
-            : <> <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            : <>{localStorage.getItem('role')=="Lineman"? <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link className="nav-item nav-link" aria-current="page" to="/profile">Profile Page</Link>
             </li>
@@ -61,7 +61,7 @@ export default function Navbar(props) {
                 <Link className="nav-item nav-link" aria-current="page" to="/updateLineman">Update Lineman</Link>
               </div>
             </li> */}
-          </ul></>}
+          </ul>:<></>}</>}
 
 
 
