@@ -1,22 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Data from './Data.js';
+import {useEffect} from 'react'
 
 
 
 function WorkAssign() {
+    const[data,setdata]=useState([]);
 
-    let data=[{
-        name:"abc",
-        pno:"123"
-    },{
-        name:"xyz",
-        pno:"123"
-    },{
-        name:"lmz",
-        pno:"123"
-    },{
-        name:"lmz",
-        pno:"123"
-    }]
+    // let data=[{
+    //     name:"abc",
+    //     pno:"123"
+    // },{
+    //     name:"xyz",
+    //     pno:"123"
+    // },{
+    //     name:"lmz",
+    //     pno:"123"
+    // },{
+    //     name:"lmz",
+    //     pno:"123"
+    // }]
+
+      //let data=Data()
+ 
+     
+        useEffect(() => {
+           // call api or anything
+           setdata(Data())
+           console.log("loaded");
+        });
+
     
     return (
         <>
