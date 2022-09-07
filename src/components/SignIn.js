@@ -78,7 +78,7 @@ function SignIn(props) {
 
     return (
         <>
-            {!localStorage.getItem('role') ? <></> : <div className="container">
+            {localStorage.getItem('role') ? <></> : <div className="container">
                 <div className="card login-form mx-auto">
                     <div className="card-body">
                         <div className="card-title text-center"><h2>Sign In</h2></div>
