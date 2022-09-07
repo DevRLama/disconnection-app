@@ -12,27 +12,11 @@ const disconnectionSchema = mongoose.Schema({
     },
 
     address:{
-        type:String,
-        required:true
+        type:String
     },
 
-    dueAmount:{
+    dues:{
         type:Number,
-        required:true
-    },
-
-    discom:{
-        type:String,
-        required:true
-    },
-
-    zone:{
-        type:String,
-        required:true
-    },
-
-    circle:{
-        type:String,
         required:true
     },
 
@@ -41,10 +25,33 @@ const disconnectionSchema = mongoose.Schema({
         required:true
     },
 
-    subdivision:{
-        type:String,
-        required:true
+    subDivision:{
+        type:String
     },
+
+    subStation:{
+        type:String
+    },
+
+    feeder:{
+        type:String
+    },
+
+    billingStatus:{
+        type:String
+    },
+
+    phone:{
+        type:String
+    },
+
+    billBasis:{
+        type:String
+    },
+
+    contractLoad:{
+        type:String
+    }
 
 });
 
