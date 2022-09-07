@@ -60,6 +60,7 @@ function SignIn(props) {
 
         if (response.data.respCode === 1) {
             localStorage.setItem('role', profile.role)
+            localStorage.setItem('userId', profile.userId)
             navigate("/profile")
             props.showAlert("Succesfully logged in", "success")
         } else {
