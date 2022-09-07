@@ -28,8 +28,8 @@ function SignIn(props) {
 
         console.log(response)
         if (response.data.respCode === 1) {
-
-            setprofile({ userId: response.data.user.userID, firstName: response.data.user.firstName, lastName: response.data.user.lastName, role: response.data.user.role })
+            localStorage.setItem('userId', response.data.user.userId)
+            setprofile({ userId: response.data.user.userId, firstName: response.data.user.firstName, lastName: response.data.user.lastName, role: response.data.user.role })
             document.querySelector("#OTPForm").hidden = false
             console.log("hi")
         } else {
@@ -60,7 +60,6 @@ function SignIn(props) {
 
         if (response.data.respCode === 1) {
             localStorage.setItem('role', profile.role)
-            localStorage.setItem('userId', profile.userId)
             navigate("/profile")
             props.showAlert("Succesfully logged in", "success")
         } else {
