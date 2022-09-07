@@ -1,33 +1,24 @@
 
-const Data= data=>{
+// import axios from 'axios'
+// const Data= async(data)=>{
 
     
+//     const response = await axios({
+
+//         // Endpoint to send files
+//         url: "http://localhost:8080/api/dc/getdc",
+//         method: "GET",
+//         params: {
+//             count: 50
+//         }
+//     })
 
 
 
+// console.log(response.data.disconnectionData)
+//     return(response.data.disconnectionData)
 
 
-    return( [{
-    name:"abc",
-    pno:"123"
-},{
-    name:"xyz",
-    pno:"123"
-},{
-    name:"lmz",
-    pno:"123"
-},{
-    name:"www",
-    pno:"123"
-},{
-    name:"wdw",
-    pno:"123"
-},{
-    name:"dwd",
-    pno:"125"
-}])
+// }
 
-
-}
-
-export default Data
+// export default Data

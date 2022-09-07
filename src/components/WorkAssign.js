@@ -1,12 +1,21 @@
 import React, { useState } from 'react'
-import Data from './Data.js';
+// import Data from './Data.js';
+import axios from 'axios';
 import {useEffect} from 'react'
+
 
 
 
 function WorkAssign() {
     const[data,setdata]=useState([]);
 
+    
+
+    
+        
+    
+    
+   
     // let data=[{
     //     name:"abc",
     //     pno:"123"
@@ -24,20 +33,48 @@ function WorkAssign() {
       //let data=Data()
  
      
-        useEffect(() => {
+        useEffect( () => {
            // call api or anything
-           setdata(Data())
-           console.log("loaded");
-        });
+           async function fetchData() {
+            // You can await here
+            const response = await axios({
+    
+                // Endpoint to send files
+                url: "http://localhost:8080/api/dc/getdc",
+                method: "GET",
+                params: {
+                    count: 50
+                }
+               
+            })
+           setdata(response.data.disconnectionData)
+            // ...
+          }
+          fetchData()         
+
+        //    const response = await axios({
+    
+        //     // Endpoint to send files
+        //     url: "http://localhost:8080/api/dc/getdc",
+        //     method: "GET",
+        //     params: {
+        //         count: 50
+        //     }
+        // })
+        //    Data=response.data.disconnectionData
+        //    console.log(response.data.disconnectionData);
+          
+        },[]);
 
     
     return (
         <>
+        
        
        {!localStorage.getItem('role') ? <></> :<><h2>Assign Work to Lineman</h2>
         <hr/>
 
-
+    
             <div className='container'>
                 <table className="table table-striped" style={{ border: "1px solid black" }}>
                     <thead>
@@ -45,8 +82,17 @@ function WorkAssign() {
 
                             <th scope="col">#</th>
                             <th scope='col'>Assign</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
+                            <th scope="col">accountId</th>
+                            <th scope='col'>Name</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Dues</th>
+                            <th scope="col">Division</th>
+                            <th scope='col'>SubDivision</th>
+                            <th scope="col">SubStation</th>
+                            <th scope="col">Billing Status</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Billing Basis</th>
+                            <th scope="col">Contrct Load</th>
                             
                         </tr>
                     </thead>
@@ -62,8 +108,17 @@ function WorkAssign() {
 
                                 </label>
                             </td>
+                            <td>{data.accountId}</td>
                             <td>{data.name}</td>
-                            <td>{data.pno}</td>
+                            <td>{data.address}</td>
+                            <td>{data.dues}</td>
+                            <td>{data.division}</td>
+                            <td>{data.subDivision}</td>
+                            <td>{data.subStation}</td>
+                            <td>{data.billingStatus}</td>
+                            <td>{data.phone}</td>
+                            <td>{data.billBasis}</td>
+                            <td>{data.contractLoad}</td>
                         </tr>
 
                             )
