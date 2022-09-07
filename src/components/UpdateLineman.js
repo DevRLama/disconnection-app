@@ -73,7 +73,7 @@ function UpdateLineman(props) {
     <>
 
 
-      <div className="container">
+{!localStorage.getItem('role') ? <></> : <> <div className="container">
         <div><h2>Update Lineman</h2></div>
         <div><hr /></div>
 
@@ -108,7 +108,7 @@ function UpdateLineman(props) {
           <button type="submit" className="btn btn-primary" >Update</button>
         </form>
 
-      </div>
+      </div></>}
 
 
 

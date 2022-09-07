@@ -21,7 +21,7 @@ function WorkAssign() {
     return (
         <>
        
-        <h2>Assign Work to Lineman</h2>
+       {!localStorage.getItem('role') ? <></> :<><h2>Assign Work to Lineman</h2>
         <hr/>
 
 
@@ -81,7 +81,7 @@ function WorkAssign() {
                 </form>
 
 
-            </div>
+            </div></>}
 
 
 

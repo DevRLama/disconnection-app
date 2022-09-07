@@ -47,7 +47,7 @@ function DeleteLineman(props) {
 
     return (
         <>
-            <div className="container">
+            {!localStorage.getItem('role') ? <></> : <div className="container">
                 <div><h2>Delete Lineman</h2></div>
                 <div><hr /></div>
 
@@ -60,7 +60,7 @@ function DeleteLineman(props) {
                     <button type="submit" className="btn btn-primary" >Submit</button>
                 </form>
                 
-            </div>
+            </div>}
 
 
 

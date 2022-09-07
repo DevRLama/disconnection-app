@@ -9,7 +9,7 @@ function AddLineman(props) {
     const [userDetail, setuserDetail] = useState({ firstName: "", lastName: "", mobileno: "" })
     const [role, setrole] = useState("")
     let navigate = useNavigate();
-   
+
 
 
     const handleSubmit = async (e) => {
@@ -31,16 +31,16 @@ function AddLineman(props) {
 
         //     })
         // })
-      
-        
-        const response = await axios.post("http://localhost:8080/api/user/create",
-        JSON.stringify({
-            firstName: userDetail.firstName,
-            lastName: userDetail.lastName,
-            mobileno: userDetail.mobileno,
-            role:role
 
-        }), {headers:{'Content-Type':'application/json'}})
+
+        const response = await axios.post("http://localhost:8080/api/user/create",
+            JSON.stringify({
+                firstName: userDetail.firstName,
+                lastName: userDetail.lastName,
+                mobileno: userDetail.mobileno,
+                role: role
+
+            }), { headers: { 'Content-Type': 'application/json' } })
         if (response.data.respCode === 1) {
             navigate("/profile")
             props.showAlert("Succesfully Created Lineman ", "success")
@@ -62,30 +62,29 @@ function AddLineman(props) {
 
     return (
         <>
-            <div className="container">
+
+            {!localStorage.getItem('role') ? <></> : <div className="container">
                 <div><h2>Add Lineman</h2></div>
                 <div><hr /></div>
 
                 <form onSubmit={handleSubmit}>
                     <div className="form-group my-4">
 
-                        <input type="text" className="form-control" id="firstName"  onChange={onChange} placeholder="First Name" required />
+                        <input type="text" className="form-control" id="firstName" onChange={onChange} placeholder="First Name" required />
                     </div>
                     <div className="form-group my-4">
 
-                        <input type="text" className="form-control" id="lastName"  onChange={onChange} placeholder="Last Name" required />
+                        <input type="text" className="form-control" id="lastName" onChange={onChange} placeholder="Last Name" required />
                     </div>
                     <div className="form-group my-4">
 
-                        <input type="text" className="form-control" id="mobileno"  onChange={onChange} placeholder="Mobile No" required />
+                        <input type="text" className="form-control" id="mobileno" onChange={onChange} placeholder="Mobile No" required />
                     </div>
-                    
+
                     <button type="submit" className="btn btn-primary" >Submit</button>
                 </form>
 
-            </div>
-
-
+            </div>}
 
         </>
 
