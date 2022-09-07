@@ -25,7 +25,7 @@ export default function Navbar(props) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
 
 
-          {localStorage.getItem('role') ?
+          {localStorage.getItem('role')==="JE" ?
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link className="nav-item nav-link" aria-current="page" to="/profile">Profile Page</Link>
@@ -44,7 +44,24 @@ export default function Navbar(props) {
                 </div>
               </li>
             </ul>
-            : <></>}
+            : <> <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <Link className="nav-item nav-link" aria-current="page" to="/profile">Profile Page</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-item nav-link" aria-current="page" to="/workAssign">Work Assigned</Link>
+            </li>
+            {/* <li className="nav-item dropdown">
+              <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Manage Lineman
+              </Link>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <Link className="nav-item nav-link" aria-current="page" to="/addLineman">Add Lineman</Link>
+                <Link className="nav-item nav-link" aria-current="page" to="/deleteLineman">Delete Lineman</Link>
+                <Link className="nav-item nav-link" aria-current="page" to="/updateLineman">Update Lineman</Link>
+              </div>
+            </li> */}
+          </ul></>}
 
 
 
