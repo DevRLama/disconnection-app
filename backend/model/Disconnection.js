@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3cf44914ed68a387801daa53fc280d9da080883c
 
 const disconnectionSchema = mongoose.Schema({
     accountId:{
