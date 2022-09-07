@@ -13,6 +13,7 @@ import WorkAssign from './components/WorkAssign';
 import AddLineman from './components/AddLineman';
 import DeleteLineman from './components/DeleteLineman';
 import UpdateLineman from './components/UpdateLineman';
+import WorkAssigned from './components/WorkAssigned';
 
 
 
@@ -44,6 +45,7 @@ function App() {
             <Route exact path="/addLineman" element={<AddLineman showAlert={showAlert} />} />
             <Route exact path="/deleteLineman" element={<DeleteLineman showAlert={showAlert} />} />
             <Route exact path="/updateLineman" element={<UpdateLineman showAlert={showAlert} />} />
+            <Route exact path="/workAssigned" element={<WorkAssigned showAlert={showAlert} />} />
 
             
             
