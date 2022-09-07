@@ -6,22 +6,20 @@ import ProfileData from './ProfileData'
 
 
 function HomePage() {
-  
-
- 
-
- 
-  
-  
-
 
     return (
-     
 
-     <><h2>User Home page</h2></>
-            
 
-                )
+        <><h2>{localStorage.getItem('role')} Home page</h2>
+            <table className="table table-striped table-hover">
+                <tr>
+                    <td>First Name</td>
+                    <td></td>
+                </tr>
+            </table>
+        </>
+
+    )
 }
 
 export default HomePage
