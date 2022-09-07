@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { FLOAT } = require('mysql/lib/protocol/constants/types');
 
 const disconnectionSchema = mongoose.Schema({
     accountId:{
@@ -50,7 +51,7 @@ const disconnectionSchema = mongoose.Schema({
     },
 
     contractLoad:{
-        type:String
+        type:Number
     }
 
 });
