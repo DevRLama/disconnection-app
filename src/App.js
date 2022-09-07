@@ -31,6 +31,9 @@ function App() {
   }
   return (
     <>
+      <div className='container-fluid'>
+        <img src="uppcl_logo.png" alt="" srcset="" />
+      </div>
       <Router>
         <Navbar title="Disconnection Portal" showAlert={showAlert} />
         {/* <Sidebar></Sidebar> */}

@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { useEffect } from 'react'
-import ProfileData from './ProfileData'
+
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -44,7 +43,7 @@ class HomePage extends React.Component {
     render() {
         return (
             <>
-                {!localStorage.getItem('role') ? <></> : <><h2>{localStorage.getItem('role')} Home page</h2>
+                {!localStorage.getItem('role') ? <></> : <><h3>{localStorage.getItem('role')} Home page</h3>
                     <table className="table table-striped table-light text-left">
                         <tbody>
                             <tr>

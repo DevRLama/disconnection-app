@@ -74,7 +74,7 @@ function UpdateLineman(props) {
 
 
 {!localStorage.getItem('role') ? <></> : <> <div className="container">
-        <div><h2>Update Lineman</h2></div>
+        <div><h3>Update Lineman</h3></div>
         <div><hr /></div>
 
         <form onSubmit={handleSubmit}>

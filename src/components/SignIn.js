@@ -81,7 +81,9 @@ function SignIn(props) {
             {localStorage.getItem('role') ? <></> : <div className="container">
                 <div className="card login-form mx-auto">
                     <div className="card-body">
-                        <div className="card-title text-center"><h2>Sign In</h2></div>
+                       
+                        <div className="card-title text-center"><h3>Sign In </h3></div>
+                        
                         
                         <div className='card-text'>
                             <form onSubmit={handleSubmit}>
@@ -89,7 +91,7 @@ function SignIn(props) {
 
                                     <input type="number" className="form-control" id="mobileNumber" aria-describedby="emailHelp" onChange={onChange} placeholder="Mobile Number" required />
                                 </div>
-                                <button type="submit" className="btn btn-primary" >Send OTP</button>
+                                <button type="submit" className="btn btn-primary"  >Send OTP</button>
                             </form>
                             <div id="OTPForm" hidden={true}>
                                 <form onSubmit={handleSignIn} className='my-3'  >
