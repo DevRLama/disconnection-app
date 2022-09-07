@@ -55,3 +55,16 @@ div.content {
     float: none;
   }
 }
+
+.login-form, .signup-form{
+  padding:5px;
+  width: 420px;  
+}
+
+.login-form .form-group, .signup-form .form-group{
+  margin: 10px 0;
+}
+
+.login-form button, .signup-form button{
+  width: 100%;
+}

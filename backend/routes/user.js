@@ -46,7 +46,7 @@ router.get('/verifyotp', async (req, resp) => {
     if (user.otp === otp) {
         console.log("OTP verified successfully");
         resp.send({ respCode: 1, respMsg: "OTP verified successfully" });
-        await User.findOneAndUpdate({userId:userId},{$set:{otp:""}})
+        await User.findOneAndUpdate({ userId: userId }, { $set: { otp: "" } })
     }
     else {
         resp.send({ respCode: 2, respMsg: "Incorrect OTP" });
@@ -67,63 +67,60 @@ router.get('/deleteuser', async (req, resp) => {
                 console.log(user);
                 resp.send({ respCode: 1, user: user });
             }
-        }else{
-            resp.send({ respCode: 3, respMsg:"User is not a lineman" });
+        } else {
+            resp.send({ respCode: 3, respMsg: "User is not a lineman" });
         }
-    } 
-     else {
-    resp.send({ respCode: 4, respMsg: "User doesn't exist" });
-}
+    }
+    else {
+        resp.send({ respCode: 4, respMsg: "User doesn't exist" });
+    }
 
-    
-      
-    
-    
+
+
+
+
 })
 
-router.post('/create', async (req, resp) => {
-    [
-        body('mobileno', 'mobile no is required').exists({ checkFalsy: true }),
-        body('firstName', 'first name is required').exists({ checkFalsy: true }),
-        body('lastName', 'last name is required').exists({ checkFalsy: true }),
-        body('role', 'role is required').exists({ checkFalsy: true })
-    ],
-        console.log(req)
-    //if there are errors, Bad request return
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return resp.send({ respCode: 2, respMsg: errors.array() })
-    }
-    try {
-        console.log(req.body);
-        let user = await User.findOne({ userId: req.body.mobileno })
-        if (user) {
-            return resp.send({ respCode: 3, respMsg: "User with mobile no already exists" });
+router.post('/create',[
+    body('mobileno', 'mobile no is required').exists({ checkFalsy: true }),
+    body('firstName', 'first name is required').exists({ checkFalsy: true }),
+    body('lastName','last name is required').exists({ checkFalsy: true }),
+    body('role', 'role is required').exists({ checkFalsy: true })
+],async (req, resp) => {
+        console.log(req.body)
+        //if there are errors, Bad request return
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return resp.send({ respCode: 2, respMsg: errors.array() })
         }
-        user = await User.create({
-            userId: req.body.mobileno,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            role: req.body.role
-        })
-        resp.send({ respCode: 1, respMsg: "User created successfully" });
-    }
-    catch (error) {
-        console.log(error);
-        resp.send({ respCode: 4, respMsg: "Error creating user" });
-    }
-})
+        try {
+            let user = await User.findOne({ userId: req.body.mobileno })
+            if (user) {
+                return resp.send({ respCode: 3, respMsg: "User with mobile no already exists" });
+            }
+            user = await User.create({
+                userId: req.body.mobileno,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                role: req.body.role
+            })
+            resp.send({ respCode: 1, respMsg: "User created successfully" });
+        }
+        catch (error) {
+            console.log(error);
+            resp.send({ respCode: 4, respMsg: "Error creating user" });
+        }
+    })
 
 
 //Route: To update data of lineman
-router.post('/update', async (req, resp) => {
-    [
-        body('mobileno', 'mobile no is required').exists({ checkFalsy: true }),
-        body('firstName', 'first name is required').exists({ checkFalsy: true }),
-        body('lastName', 'last name is required').exists({ checkFalsy: true }),
-
-    ],
-        console.log(req)
+router.post('/update', [
+    body('mobileno', 'mobile no is required').exists({ checkFalsy: true }),
+    body('firstName', 'first name is required').exists({ checkFalsy: true }),
+    body('lastName', 'last name is required').exists({ checkFalsy: true }),
+],async (req, resp) => {
+    
+    console.log(req)
     //if there are errors, Bad request return
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
