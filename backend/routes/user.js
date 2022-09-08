@@ -1,8 +1,4 @@
 const user = require('../model/User');
-<<<<<<< HEAD
-=======
-
->>>>>>> 3f7c6051d8589e60594e9f04980d489f4ae500d8
 const express = require('express');
 const User = require('../model/User');
 const { body, validationResult } = require('express-validator');
