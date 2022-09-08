@@ -1,5 +1,4 @@
 const user = require('../model/User');
-const userMapping = require('../model/UserMapping');
 const express = require('express');
 const User = require('../model/User');
 const { body, validationResult } = require('express-validator');
@@ -147,6 +146,18 @@ router.post('/update', [
 
 router.get('/getlineman',async (req,resp)=>{
     const userId = req.query.userId;
+    if(userId){
+        try{
+            let linemans = await User.find({supervisorID:userId});
+            resp.send({ respCode: 1, linemans});
+        }
+        catch(error){
+            resp.send({ respCode: 2, respMsg: "Error fetching lineman" });
+        }
+    }
+    else {
+        resp.send({ respCode: 3, respMsg: "userId is required" });
+    }
     
 })
 
