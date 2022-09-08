@@ -43,8 +43,8 @@ function WorkAssign() {
                         <thead>
                             <tr>
 
-                                <th scope="col">#</th>
-                                <th scope='col'>Assign</th>
+                                <th scope="col">#</th>                               
+                                <th scope='col'>  Assign</th>
                                 <th scope="col">AccountId</th>
                                 <th scope='col'>Name</th>
                                 <th scope="col">Address</th>
