@@ -8,9 +8,10 @@ import { useEffect } from 'react'
 
 function WorkAssign() {
     const [data, setdata] = useState([]);
+    const [linemandata, setlinemandata] = useState([])
 
     useEffect(() => {
-        // call api or anything
+        // call api for disconnection data
         async function fetchData() {
             // You can await here
             const response = await axios({
@@ -26,7 +27,25 @@ function WorkAssign() {
             setdata(response.data.disconnectionData)
             // ...
         }
+
+        //API call to populate lineman details
+        async function fetchLineman() {
+            // You can await here
+            const response = await axios({
+
+                // Endpoint to send files
+                url: "http://localhost:8080/api/dc/getdc",
+                method: "GET",
+                params: {
+                    userId: localStorage.getItem('userId')
+                }
+
+            })
+            setlinemandata(response.data.linemanData)
+            // ...
+        }
         fetchData()
+        fetchLineman()
     }, []);
 
 
@@ -43,7 +62,7 @@ function WorkAssign() {
                         <thead>
                             <tr>
 
-                                <th scope="col">#</th>                               
+                                <th scope="col">#</th>
                                 <th scope='col'>  Assign</th>
                                 <th scope="col">AccountId</th>
                                 <th scope='col'>Name</th>
@@ -56,7 +75,7 @@ function WorkAssign() {
                                 <th scope="col">Phone</th>
                                 <th scope="col">Billing-Basis</th>
                                 <th scope="col">Contract-Load</th>
-                                <th scope="col">Feeder-Code</th>
+                                <th scope="col">Feeder-Name</th>
                                 {/* <th scope="col">Assign</th> */}
 
                             </tr>
@@ -104,12 +123,19 @@ function WorkAssign() {
 
                         <div className="row" >
                             <div className="col-4 text-center "> <label><h5>Assign To</h5></label></div>
-                            <div className="col-6"><select className="form-select" aria-label="Default select example">
-                                <option selected>Select Lineman</option>
-                                <option value="1">Lineman 1</option>
-                                <option value="2">Lineman 2</option>
-                                <option value="3">Lineman 3</option>
-                            </select></div>
+                            <div className="col-6">
+                                <select className="form-select" aria-label="Default select example">
+                                    <option selected>Select Lineman</option>
+                                    {
+                                        linemandata.map((data) => {
+                                            return (
+
+                                                <option value={linemandata.firstName + linemandata.lastName}>{linemandata.firstName + linemandata.lastName}</option>
+                                            )
+                                        })
+                                    }
+
+                                </select></div>
                             <div className='col'><button type="button" className="btn btn-primary ">Submit</button></div>
 
                         </div>

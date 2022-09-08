@@ -1,5 +1,5 @@
 const user = require('../model/User');
-const userMapping = require('../model/UserMapping');
+
 const express = require('express');
 const User = require('../model/User');
 const { body, validationResult } = require('express-validator');
