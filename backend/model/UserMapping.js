@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 
 const userMappingSchema = mongoose.Schema({
-    substationId: { 
-        type: String,
-        require: true
-    },
+    
     userId: { 
         type: String,
         require:true

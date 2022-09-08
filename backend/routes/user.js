@@ -145,7 +145,10 @@ router.post('/update', [
     }
 })
 
-
+router.get('/getlineman',async (req,resp)=>{
+    const userId = req.query.userId;
+    
+})
 
 
 
