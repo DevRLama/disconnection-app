@@ -54,6 +54,24 @@ const disconnectionSchema = mongoose.Schema({
     },
     feederCode:{
         type:String
+    },
+    AssignedTo: { 
+        type: String,
+        require:true
+    },
+    AssignedBy: {
+        type: String,
+        require:true
+    },
+    AssignedDate: {
+        type: Date,
+        require:true
+    },
+    CompletionDate: {
+        type: Date
+    },
+    Remark:{
+        type: String
     }
 
 });

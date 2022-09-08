@@ -19,6 +19,10 @@ const userSchema = mongoose.Schema({
     otp:{
         type:String,
     },
+    supervisorID:{
+        type:String,
+       
+    },
     isDeleted:{
         type:Boolean,
         default:false
