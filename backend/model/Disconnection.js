@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const disconnectionSchema = mongoose.Schema({
     accountId:{
-        type:Number,
+        type:String,
         required:true
     },
 
@@ -56,16 +56,13 @@ const disconnectionSchema = mongoose.Schema({
         type:String
     },
     AssignedTo: { 
-        type: String,
-        require:true
+        type: String
     },
     AssignedBy: {
-        type: String,
-        require:true
+        type: String
     },
     AssignedDate: {
-        type: Date,
-        require:true
+        type: String
     },
     CompletionDate: {
         type: Date

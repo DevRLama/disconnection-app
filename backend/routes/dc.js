@@ -34,8 +34,7 @@ router.post('/assigndc', [
         var localDate = currDate.toLocaleString();
         console.log(localDate)
         try {
-            //console.log({ $set: { AssignedTo: linemanId, AssignedBy: jeId, AssignedDate: localDate } });
-            const result = await Disconnection.updateMany({ accountId: { $in:  [ '761625816911', '731807105706' ] } }, { $set: { AssignedTo: linemanId, AssignedBy: jeId, AssignedDate: localDate } })
+            const result = await Disconnection.updateMany({ accountId: { $in: accountIds } }, { $set: { AssignedTo: linemanId, AssignedBy: jeId, AssignedDate: localDate } })
             if (result.acknowledged) {
                 resp.send({ respCode: 1, respMsg: result.modifiedCount + " Updated successfully" });
             }
