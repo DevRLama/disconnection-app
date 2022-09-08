@@ -10,6 +10,7 @@ function WorkAssign() {
     const [data, setdata] = useState([]);
     const [linemandata, setlinemandata] = useState([])
     const [checked, setChecked] = useState([]);
+    const [selected, setselected] = useState({lineman:""});
 
 
     const handleCheck = (event) => {
@@ -22,6 +23,10 @@ function WorkAssign() {
         setChecked(updatedList);
     };
 
+    const handleChange = (event) => {
+     
+        setselected({...selected,[event.target.id]:event.target.value});
+    };
 
     // // Generate string of checked items
     // const checkedItems = checked.length ? checked.reduce((total, item) => {
@@ -47,28 +52,28 @@ function WorkAssign() {
 
             })
             setdata(response.data.disconnectionData)
-            setlinemandata([{ firstName: "Hello", lastName: "Bye" }, { firstName: "right", lastName: "Bye" }]) //set value of lineman
-            // ...
+         
+           
         }
 
-        // //API call to populate lineman details
-        // async function fetchLineman() {
-        //     // You can await here
-        //     const response = await axios({
+        //API call to populate lineman details
+        async function fetchLineman() {
+            // You can await here
+            const response = await axios({
 
-        //         // Endpoint to send files
-        //         url: "http://localhost:8080/api/dc/getdc",
-        //         method: "GET",
-        //         params: {
-        //             userId: localStorage.getItem('userId')
-        //         }
+                // Endpoint to send files
+                url: "http://localhost:8080/api/user/getlineman",
+                method: "GET",
+                params: {
+                    userId: localStorage.getItem('userId')
+                }
 
-        //     })
-        //     setlinemandata(response.data.linemanData)
-        //     // ...
-        // }
+            })
+            setlinemandata(response.data.linemans)
+            // ...
+        }
         fetchData()
-        // fetchLineman()
+        fetchLineman()
     }, []);
 
 
@@ -147,7 +152,7 @@ function WorkAssign() {
                         <div className="row" >
                             <div className="col-4 text-center "> <label><h5>Assign To</h5></label></div>
                             <div className="col-6">
-                                <select className="form-select" aria-label="Default select example">
+                                <select className="form-select" aria-label="Default select example" onChange={handleChange} id="lineman">
                                     <option selected>Select Lineman</option>
                                     {
                                         linemandata.map((data, i) => {
@@ -170,6 +175,8 @@ function WorkAssign() {
                     </form>
                     <div>
                         {console.log(checked)}
+                        {console.log(localStorage.getItem('userId'))}
+                        {console.log(selected)}
                        
                     </div>
 
