@@ -42,7 +42,7 @@ function WorkAssign(props) {
                 method: "POST",
                 body: { accountIds: checked,
                         jeId:localStorage.getItem('userId'),
-                        linemanId:response.data.linemans.userId
+                        linemanId:selected
                     
                 }
 
@@ -192,7 +192,7 @@ function WorkAssign(props) {
                                         linemandata.map((data, i) => {
                                             return (
 
-                                                <option value={data.firstName + " " + data.lastName}>{data.firstName + " " + data.lastName}</option>
+                                                <option value={data.userId}>{data.firstName + " " + data.lastName}</option>
                                             )
                                         })
                                     }
