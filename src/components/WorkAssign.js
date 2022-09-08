@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 // import Data from './Data.js';
 import axios from 'axios';
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 function WorkAssign(props) {
+    let navigate=useNavigate()
     const [data, setdata] = useState([]);
     const [linemandata, setlinemandata] = useState([])
     const [checked, setChecked] = useState([]);
@@ -48,6 +50,7 @@ function WorkAssign(props) {
             if(response.data.respCode===1)
             {
                 props.showAlert(response.data.respMsg,"success")
+                navigate("/workAssign")
             }else{
                 props.showAlert(response.data.respMsg,"danger")
             }
