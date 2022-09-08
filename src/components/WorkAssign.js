@@ -86,9 +86,9 @@ function WorkAssign() {
                 {console.log(linemandata)}
 
                 <div className='container'>
-                    <table className="table table-striped" style={{ border: "1px solid black" }}>
+                    <table className="table table-hover " style={{ border: "1px solid black" }}>
                         <thead>
-                            <tr>
+                            <tr >
 
                                 <th scope="col">#</th>
                                 <th scope='col'>  Assign</th>
@@ -112,7 +112,7 @@ function WorkAssign() {
                             {
                                 data.map((data, i) => {
                                     return (
-                                        <tr>
+                                        <tr >
                                             <th scope="row">{i}</th>
                                             <td>
                                                 <input className="form-check-input" type="checkbox" value={data.accountId} id="flexCheckDefault" onChange={handleCheck} />
