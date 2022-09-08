@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 
 
 
-function WorkAssign() {
+function WorkAssign(props) {
     const [data, setdata] = useState([]);
     const [linemandata, setlinemandata] = useState([])
     const [checked, setChecked] = useState([]);
@@ -27,6 +27,37 @@ function WorkAssign() {
      
         setselected({...selected,[event.target.id]:event.target.value});
     };
+
+
+    const handleSubmit=async(e)=>{
+        e.preventDefault();
+        async function fetchData() {
+            // You can await here
+            const response = await axios({
+
+                // Endpoint to send files
+                url: "http://localhost:8080/api/dc/assigndc",
+                method: "POST",
+                body: { accountIds: checked,
+                        jeId:localStorage.getItem('userId'),
+                        linemanId:response.data.linemans.userId
+                    
+                }
+
+            })
+            if(response.data.respCode===1)
+            {
+                props.showAlert(response.data.respMsg,"success")
+            }else{
+                props.showAlert(response.data.respMsg,"danger")
+            }
+         
+           
+        }
+
+
+
+    }
 
     // // Generate string of checked items
     // const checkedItems = checked.length ? checked.reduce((total, item) => {
@@ -86,9 +117,9 @@ function WorkAssign() {
                 {console.log(linemandata)}
 
                 <div className='container'>
-                    <table className="table table-striped" style={{ border: "1px solid black" }}>
+                    <table className="table table-hover " style={{ border: "1px solid black" }}>
                         <thead>
-                            <tr>
+                            <tr >
 
                                 <th scope="col">#</th>
                                 <th scope='col'>  Assign</th>
@@ -112,7 +143,7 @@ function WorkAssign() {
                             {
                                 data.map((data, i) => {
                                     return (
-                                        <tr>
+                                        <tr >
                                             <th scope="row">{i}</th>
                                             <td>
                                                 <input className="form-check-input" type="checkbox" value={data.accountId} id="flexCheckDefault" onChange={handleCheck} />
@@ -146,7 +177,7 @@ function WorkAssign() {
                         </tbody>
                     </table>
 
-                    <form style={{ border: "1px solid black", padding: "5px" }}>
+                    <form style={{ border: "1px solid black", padding: "5px" }} onSubmit={handleSubmit}>
 
 
                         <div className="row" >
@@ -164,7 +195,7 @@ function WorkAssign() {
                                     }
 
                                 </select></div>
-                            <div className='col'><button type="button" className="btn btn-primary ">Submit</button></div>
+                            <div className='col'><button type="button" className="btn btn-primary " >Submit</button></div>
 
                         </div>
 
