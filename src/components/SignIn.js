@@ -89,7 +89,7 @@ function SignIn(props) {
                             <form onSubmit={handleSubmit}>
                                 <div className="form-group my-4">
 
-                                    <input type="number" className="form-control" id="mobileNumber" aria-describedby="emailHelp" onChange={onChange} placeholder="Mobile Number" required />
+                                    <input type="number" className="form-control" id="mobileNumber" aria-describedby="emailHelp" onChange={onChange} placeholder="Mobile Number" required  minLength={10}/>
                                 </div>
                                 <button type="submit" className="btn btn-primary"  >Send OTP</button>
                             </form>

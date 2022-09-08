@@ -102,7 +102,7 @@ function UpdateLineman(props) {
           </div>
           <div className="form-group my-4">
 
-            <input type="text" className="form-control" id="mobilenou" aria-describedby="emailHelp" onChange={onChange} placeholder="Mobile No" required />
+            <input type="number" className="form-control" id="mobilenou" aria-describedby="emailHelp" onChange={onChange} placeholder="Mobile No" required />
           </div>
          
           <button type="submit" className="btn btn-primary" >Update</button>

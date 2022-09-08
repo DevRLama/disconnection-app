@@ -78,7 +78,7 @@ function AddLineman(props) {
                     </div>
                     <div className="form-group my-4">
 
-                        <input type="text" className="form-control" id="mobileno" onChange={onChange} placeholder="Mobile No" required />
+                        <input type="number" className="form-control" id="mobileno" onChange={onChange} placeholder="Mobile No" required  />
                     </div>
 
                     <button type="submit" className="btn btn-primary" >Submit</button>
