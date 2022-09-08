@@ -9,6 +9,28 @@ import { useEffect } from 'react'
 function WorkAssign() {
     const [data, setdata] = useState([]);
     const [linemandata, setlinemandata] = useState([])
+    const [checked, setChecked] = useState([]);
+
+
+    const handleCheck = (event) => {
+        var updatedList = [...checked];
+        if (event.target.checked) {
+            updatedList = [...checked, event.target.value];
+        } else {
+            updatedList.splice(checked.indexOf(event.target.value), 1);
+        }
+        setChecked(updatedList);
+    };
+
+
+    // // Generate string of checked items
+    // const checkedItems = checked.length ? checked.reduce((total, item) => {
+    //     return total + ", " + item;
+    // })
+    //     : "";
+
+
+
 
     useEffect(() => {
         // call api for disconnection data
@@ -25,27 +47,28 @@ function WorkAssign() {
 
             })
             setdata(response.data.disconnectionData)
+            setlinemandata([{ firstName: "Hello", lastName: "Bye" }, { firstName: "right", lastName: "Bye" }]) //set value of lineman
             // ...
         }
 
-        //API call to populate lineman details
-        async function fetchLineman() {
-            // You can await here
-            const response = await axios({
+        // //API call to populate lineman details
+        // async function fetchLineman() {
+        //     // You can await here
+        //     const response = await axios({
 
-                // Endpoint to send files
-                url: "http://localhost:8080/api/dc/getdc",
-                method: "GET",
-                params: {
-                    userId: localStorage.getItem('userId')
-                }
+        //         // Endpoint to send files
+        //         url: "http://localhost:8080/api/dc/getdc",
+        //         method: "GET",
+        //         params: {
+        //             userId: localStorage.getItem('userId')
+        //         }
 
-            })
-            setlinemandata(response.data.linemanData)
-            // ...
-        }
+        //     })
+        //     setlinemandata(response.data.linemanData)
+        //     // ...
+        // }
         fetchData()
-        fetchLineman()
+        // fetchLineman()
     }, []);
 
 
@@ -55,7 +78,7 @@ function WorkAssign() {
 
             {!localStorage.getItem('role') ? <></> : <><h3>Assign Work to Lineman</h3>
                 <hr />
-
+                {console.log(linemandata)}
 
                 <div className='container'>
                     <table className="table table-striped" style={{ border: "1px solid black" }}>
@@ -87,7 +110,7 @@ function WorkAssign() {
                                         <tr>
                                             <th scope="row">{i}</th>
                                             <td>
-                                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                                <input className="form-check-input" type="checkbox" value={data.accountId} id="flexCheckDefault" onChange={handleCheck} />
                                                 <label className="form-check-label" htmlFor="flexCheckDefault">
 
                                                 </label>
@@ -127,10 +150,10 @@ function WorkAssign() {
                                 <select className="form-select" aria-label="Default select example">
                                     <option selected>Select Lineman</option>
                                     {
-                                        linemandata.map((data) => {
+                                        linemandata.map((data, i) => {
                                             return (
 
-                                                <option value={linemandata.firstName + linemandata.lastName}>{linemandata.firstName + linemandata.lastName}</option>
+                                                <option value={data.firstName + " " + data.lastName}>{data.firstName + " " + data.lastName}</option>
                                             )
                                         })
                                     }
@@ -145,6 +168,10 @@ function WorkAssign() {
 
 
                     </form>
+                    <div>
+                        {console.log(checked)}
+                       
+                    </div>
 
 
                 </div></>}
