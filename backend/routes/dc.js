@@ -11,27 +11,36 @@ router.get('/getdc', async (req, resp) => {
         const disconnectionData = await Disconnection.find({ $or: [{ "billingStatus": "Live" }, { "billingStatus": "First Bill Issued" }, { "billingStatus": "New Connection" }] })
             .limit(count);
 
-        resp.send({respCode:1, disconnectionData});
+        resp.send({ respCode: 1, disconnectionData });
     }
-    else{
-        resp.send({respCode:2,respMsg:"count not set"})
+    else {
+        resp.send({ respCode: 2, respMsg: "count not set" })
     }
 })
 
-router.post('/assigndc',[ 
+router.post('/assigndc', [
     body().isArray(),
-    body('*.accountId', 'accountId field is required').exists( {checkFalsy: true}),
-    body('*.jeId', 'JE field is required').exists({checkFalsy: true}),
-    body('*.linemanId', 'lineman Id field is required').exists({checkFalsy: true})], async (req,resp)=>{
+    body('*.accountIds', 'accountIds field is required').exists({ checkFalsy: true }),
+    body('*.jeId', 'JE field is required').exists({ checkFalsy: true }),
+    body('*.linemanId', 'lineman Id field is required').exists({ checkFalsy: true })], async (req, resp) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return resp.send({ respCode: 2, respMsg: errors.array() })
         }
-        
-        console.log(req.body);
-
-
-
-})
+        const accountIds = req.body.accountIds;
+        const jeId = req.body.jeId;
+        const linemanId = req.body.linemanId;
+        var currDate = new Date();
+        var localDate = currDate.toLocaleString();
+        try {
+            const result = await Disconnection.updateMany({ accountId: { $in: accountIds } }, { $set: { AssignedTo: linemanId, AssignedBy: jeId, AssignedDate: localDate } })
+            if (result.acknowledged) {
+                resp.send({ respCode: 1, respMsg: result.modifiedCount + " Updated successfully" });
+            }
+        }
+        catch (error) {
+            resp.send({respCode:2, respMsg:error})
+        }
+    })
 
 module.exports = router;
