@@ -19,21 +19,23 @@ router.get('/getdc', async (req, resp) => {
 })
 
 router.post('/assigndc', [
-    body().isArray(),
-    body('*.accountIds', 'accountIds field is required').exists({ checkFalsy: true }),
-    body('*.jeId', 'JE field is required').exists({ checkFalsy: true }),
-    body('*.linemanId', 'lineman Id field is required').exists({ checkFalsy: true })], async (req, resp) => {
+    body('accountIds', 'accountIds field is required').exists({ checkFalsy: true }),
+    body('jeId', 'JE field is required').exists({ checkFalsy: true }),
+    body('linemanId', 'lineman Id field is required').exists({ checkFalsy: true })], async (req, resp) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return resp.send({ respCode: 2, respMsg: errors.array() })
+            return resp.send({ respCode: 3, respMsg: errors.array() })
         }
         const accountIds = req.body.accountIds;
         const jeId = req.body.jeId;
         const linemanId = req.body.linemanId;
+        console.log(req.body.accountIds)
         var currDate = new Date();
         var localDate = currDate.toLocaleString();
+        console.log(localDate)
         try {
-            const result = await Disconnection.updateMany({ accountId: { $in: accountIds } }, { $set: { AssignedTo: linemanId, AssignedBy: jeId, AssignedDate: localDate } })
+            //console.log({ $set: { AssignedTo: linemanId, AssignedBy: jeId, AssignedDate: localDate } });
+            const result = await Disconnection.updateMany({ accountId: { $in:  [ '761625816911', '731807105706' ] } }, { $set: { AssignedTo: linemanId, AssignedBy: jeId, AssignedDate: localDate } })
             if (result.acknowledged) {
                 resp.send({ respCode: 1, respMsg: result.modifiedCount + " Updated successfully" });
             }
