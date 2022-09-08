@@ -43,7 +43,7 @@ class HomePage extends React.Component {
     render() {
         return (
             <>
-                {!localStorage.getItem('role') ? <></> : <><h3>{localStorage.getItem('role')} Home page</h3>
+                {!localStorage.getItem('role') ? <></> : <><h3>{localStorage.getItem('role')} Home page</h3><hr/>
                     <table className="table table-striped table-light text-left">
                         <tbody>
                             <tr>
