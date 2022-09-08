@@ -48,7 +48,7 @@ function DeleteLineman(props) {
     return (
         <>
             {!localStorage.getItem('role') ? <></> : <div className="container">
-                <div><h2>Delete Lineman</h2></div>
+                <div><h3>Delete Lineman</h3></div>
                 <div><hr /></div>
 
                 <form onSubmit={handleSubmit}>

@@ -8,31 +8,7 @@ import {useEffect} from 'react'
 
 function WorkAssign() {
     const[data,setdata]=useState([]);
-
-    
-
-    
-        
-    
-    
-   
-    // let data=[{
-    //     name:"abc",
-    //     pno:"123"
-    // },{
-    //     name:"xyz",
-    //     pno:"123"
-    // },{
-    //     name:"lmz",
-    //     pno:"123"
-    // },{
-    //     name:"lmz",
-    //     pno:"123"
-    // }]
-
-      //let data=Data()
  
-     
         useEffect( () => {
            // call api or anything
            async function fetchData() {
@@ -50,20 +26,7 @@ function WorkAssign() {
            setdata(response.data.disconnectionData)
             // ...
           }
-          fetchData()         
-
-        //    const response = await axios({
-    
-        //     // Endpoint to send files
-        //     url: "http://localhost:8080/api/dc/getdc",
-        //     method: "GET",
-        //     params: {
-        //         count: 50
-        //     }
-        // })
-        //    Data=response.data.disconnectionData
-        //    console.log(response.data.disconnectionData);
-          
+          fetchData()          
         },[]);
 
     
@@ -71,8 +34,8 @@ function WorkAssign() {
         <>
         
        
-       {!localStorage.getItem('role') ? <></> :<><h2>Assign Work to Lineman</h2>
-        <hr/>
+       {!localStorage.getItem('role') ? <></> :<><h3>Assign Work to Lineman</h3>
+       <hr/>
 
     
             <div className='container'>
