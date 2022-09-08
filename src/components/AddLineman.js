@@ -64,7 +64,7 @@ function AddLineman(props) {
         <>
 
             {!localStorage.getItem('role') ? <></> : <div className="container">
-                <div ><h2>Add Lineman</h2></div>
+                <div ><h3>Add Lineman</h3></div>
                 <div><hr /></div>
 
                 <form onSubmit={handleSubmit}>
