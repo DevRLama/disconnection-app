@@ -59,10 +59,13 @@ function WorkAssign(props) {
            
         }
 
+<<<<<<< HEAD
 
 
     
 
+=======
+>>>>>>> 76eaec1a881c7c89001faa5ea5b38d71f3b5b53e
     // // Generate string of checked items
     // const checkedItems = checked.length ? checked.reduce((total, item) => {
     //     return total + ", " + item;
