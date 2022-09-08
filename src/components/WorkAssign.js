@@ -12,7 +12,7 @@ function WorkAssign(props) {
     const [data, setdata] = useState([]);
     const [linemandata, setlinemandata] = useState([])
     const [checked, setChecked] = useState([]);
-    const [selected, setselected] = useState({lineman:""});
+    const [selected, setselected] = useState();
 
 
     const handleCheck = (event) => {
@@ -31,9 +31,10 @@ function WorkAssign(props) {
     };
 
 
-    const handleSubmit=async(e)=>{
+    const handleworkSubmit=async(e)=>{
+        console.log("Button Clicked")
         e.preventDefault();
-        async function fetchData() {
+       
             // You can await here
             const response = await axios({
 
@@ -60,7 +61,7 @@ function WorkAssign(props) {
 
 
 
-    }
+    
 
     // // Generate string of checked items
     // const checkedItems = checked.length ? checked.reduce((total, item) => {
@@ -180,7 +181,7 @@ function WorkAssign(props) {
                         </tbody>
                     </table>
 
-                    <form style={{ border: "1px solid black", padding: "5px" }} onSubmit={handleSubmit}>
+                    <form style={{ border: "1px solid black", padding: "5px" }} onSubmit={handleworkSubmit}>
 
 
                         <div className="row" >
