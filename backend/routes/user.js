@@ -85,7 +85,7 @@ router.post('/create',[
     body('firstName', 'first name is required').exists({ checkFalsy: true }),
     body('lastName','last name is required').exists({ checkFalsy: true }),
     body('role', 'role is required').exists({ checkFalsy: true }),
-    body('supesupervisorID', 'supervisorID is required').exists({ checkFalsy: true }),
+    body('supervisorID', 'supervisorID is required').exists({checkFalsy: true }),
 ],async (req, resp) => {
         console.log(req.body)
         //if there are errors, Bad request return
@@ -103,7 +103,8 @@ router.post('/create',[
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 role: req.body.role,
-                supervisorID:req.body.supervisorID
+                supervisorID:req.body.supervisorID,
+                isDeleted:"false"
             })
             console.log(user)
             resp.send({ respCode: 1, respMsg: "User created successfully" });
