@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function WorkAssign(props) {
-    let navigate=useNavigate()
+    let navigate = useNavigate()
     const [data, setdata] = useState([]);
     const [linemandata, setlinemandata] = useState([])
     const [checked, setChecked] = useState([]);
@@ -26,42 +26,44 @@ function WorkAssign(props) {
     };
 
     const handleChange = (event) => {
-     
-        setselected({...selected,[event.target.id]:event.target.value});
+
+        setselected({ ...selected, [event.target.id]: event.target.value });
     };
 
 
-    const handleworkSubmit=async(e)=>{
-        e.preventDefault();
-       
-            // You can await here
-            const response = await axios({
+    const handleworkSubmit = async (e) => {
+       // e.preventDefault();
 
-                // Endpoint to send files
-                url: "http://localhost:8080/api/dc/assigndc",
-                method: "POST",
-                body: { accountIds: checked,
-                        jeId:localStorage.getItem('userId'),
-                        linemanId:selected
-                    
-                }
 
-            })
-            
-            if(response.data.respCode===1)
-            {
-                props.showAlert(response.data.respMsg,"success")
-                navigate("/workAssign")
-            }else{
-                props.showAlert(response.data.respMsg,"danger")
-            }
-         
-           
+
+
+        const response = await axios.post("http://localhost:8080/api/dc/assigndc",
+            JSON.stringify({
+                accountIds: checked,
+                jeId: localStorage.getItem('userId'),
+                linemanId: selected.lineman
+
+
+            }), { headers: { 'Content-Type': 'application/json' } })
+        if (response.data.respCode === 1) {
+            props.showAlert(response.data.respMsg, "success")
+            navigate("/workAssign")
+        } else {
+            props.showAlert(response.data.respMsg, "danger")
         }
 
 
 
-    
+
+
+
+
+
+    }
+
+
+
+
 
     // // Generate string of checked items
     // const checkedItems = checked.length ? checked.reduce((total, item) => {
@@ -87,8 +89,8 @@ function WorkAssign(props) {
 
             })
             setdata(response.data.disconnectionData)
-         
-           
+
+
         }
 
         //API call to populate lineman details
@@ -212,7 +214,7 @@ function WorkAssign(props) {
                         {console.log(checked)}
                         {console.log(localStorage.getItem('userId'))}
                         {console.log(selected)}
-                       
+
                     </div>
 
 

@@ -60,28 +60,17 @@ function WorkAssigned(props) {
 
     const handleClick=async(e)=>{
 
-        e.preventDefault();
-       
-        // You can await here
-        const response = await axios({
-
-            // Endpoint to send files
-            url: "http://localhost:8080/api/dc/setdcDate",
-            method: "POST",
-            body: { accountIds: checked,                    
-                
-            }
-
-        })
-        
-        if(response.data.respCode===1)
-        {
-            props.showAlert(response.data.respMsg,"success")
-            navigate("/workAssign")
-        }else{
-            props.showAlert(response.data.respMsg,"danger")
+        //e.preventDefault(); 
+        const response = await axios.post("http://localhost:8080/api/dc/setdcDate",
+            JSON.stringify({
+                accountIds: checked
+            }), { headers: { 'Content-Type': 'application/json' } })
+        if (response.data.respCode === 1) {
+            props.showAlert(response.data.respMsg, "success")
+            navigate("/workAssigned")
+        } else {
+            props.showAlert(response.data.respMsg, "danger")
         }
-     
 
     }
 
