@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
-// import Data from './Data.js';
+import React, { useState,useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useEffect } from 'react'
 
 
 
 
-function WorkAssigned() {
+
+function WorkAssigned(props) {
+    let navigate=useNavigate()
     const [linemandcdata, setlinemandcdata] = useState([]);
     // const [linemandata, setlinemandata] = useState([])
     const [checked, setChecked] = useState([]);
-    const [selected, setselected] = useState({lineman:""});
+    // const [selected, setselected] = useState({lineman:""});
    
     
 
@@ -42,26 +43,47 @@ function WorkAssigned() {
 
     const handleCheck = (event) => {
         var updatedList = [...checked];
+      
         if (event.target.checked) {
             updatedList = [...checked, event.target.value];
+          
+            
        
         } else {
             updatedList.splice(checked.indexOf(event.target.value), 1);
     
         }
+     
         setChecked(updatedList);
+       
     };
 
-    // const handleChange = (event) => {
-     
-    //     setselected({...selected,[event.target.id]:event.target.value});
-    // };
+    const handleClick=async(e)=>{
 
-    // // Generate string of checked items
-    // const checkedItems = checked.length ? checked.reduce((total, item) => {
-    //     return total + ", " + item;
-    // })
-    //     : "";
+        e.preventDefault();
+       
+        // You can await here
+        const response = await axios({
+
+            // Endpoint to send files
+            url: "http://localhost:8080/api/dc/setdcDate",
+            method: "POST",
+            body: { accountIds: checked,                    
+                
+            }
+
+        })
+        
+        if(response.data.respCode===1)
+        {
+            props.showAlert(response.data.respMsg,"success")
+            navigate("/workAssign")
+        }else{
+            props.showAlert(response.data.respMsg,"danger")
+        }
+     
+
+    }
 
 
 
@@ -84,7 +106,7 @@ function WorkAssigned() {
                             <tr className=''>
 
                                 <th scope="col">#</th>
-                                <th scope='col'>Assign</th>
+                                <th scope='col'>Disconnected</th>
                                 <th scope="col">AccountId</th>
                                 <th scope='col'>Name</th>
                                 <th scope="col">Address</th>
@@ -126,7 +148,7 @@ function WorkAssigned() {
                                             <td>{data.billBasis}</td>
                                             <td>{data.contractLoad}</td>
                                             <td>{data.feederCode}</td>
-                                            <td><input type="text" class="form-control" placeholder="Remark" /></td>
+                                            {/* <td><input id="remark" type="text" class="form-control" placeholder="Remark" onChange={onChange} /></td> */}
 
                                             {/* <td><select name="Lineman" id="Lineman">
                                                 <option value="Lineman1">Lineman 1</option>
@@ -141,6 +163,7 @@ function WorkAssigned() {
                             }
                         </tbody>
                     </table>
+                    <div className='container'><button type='button' className='btn btn-primary' onClick={handleClick}>Submit Response</button></div>
 
                     {/* <form style={{ border: "1px solid black", padding: "5px" }}>
 
@@ -172,7 +195,7 @@ function WorkAssigned() {
                     <div>
                         {console.log(checked)}
                         {console.log(localStorage.getItem('userId'))}
-                        {console.log(selected)}
+                      
                        
                     </div>
 
