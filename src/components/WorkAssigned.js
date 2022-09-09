@@ -9,9 +9,9 @@ import axios from 'axios';
 function WorkAssigned(props) {
     let navigate=useNavigate()
     const [linemandcdata, setlinemandcdata] = useState([]);
-    // const [linemandata, setlinemandata] = useState([])
+  
     const [checked, setChecked] = useState([]);
-    // const [selected, setselected] = useState({lineman:""});
+   
    
     
 
@@ -60,14 +60,15 @@ function WorkAssigned(props) {
 
     const handleClick=async(e)=>{
 
-        //e.preventDefault(); 
+      //e.preventDefault(); 
         const response = await axios.post("http://localhost:8080/api/dc/setdcDate",
             JSON.stringify({
                 accountIds: checked
             }), { headers: { 'Content-Type': 'application/json' } })
         if (response.data.respCode === 1) {
             props.showAlert(response.data.respMsg, "success")
-            navigate("/workAssigned")
+            window.location.reload();
+            // navigate("/workAssigned")
         } else {
             props.showAlert(response.data.respMsg, "danger")
         }
