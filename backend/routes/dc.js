@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/getdc', async (req, resp) => {
     const count = req.query.count;
     if (count) {
-        const disconnectionData = await Disconnection.find({ $or: [{ "billingStatus": "Live" }, { "billingStatus": "First Bill Issued" }, { "billingStatus": "New Connection" }] })
+        const disconnectionData = await Disconnection.find({ $and: [{ $or: [{ "billingStatus": "Live" }, { "billingStatus": "First Bill Issued" }, { "billingStatus": "New Connection" },] },{"AssignedTo":""}]})
             .limit(count);
 
         resp.send({ respCode: 1, disconnectionData });
@@ -26,6 +26,7 @@ router.post('/assigndc', [
         if (!errors.isEmpty()) {
             return resp.send({ respCode: 3, respMsg: errors.array() })
         }
+        console.log(req.body)
         const accountIds = req.body.accountIds;
         const jeId = req.body.jeId;
         const linemanId = req.body.linemanId;

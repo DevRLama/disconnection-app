@@ -38,9 +38,11 @@ function AddLineman(props) {
                 firstName: userDetail.firstName,
                 lastName: userDetail.lastName,
                 mobileno: userDetail.mobileno,
-                role: role
+                role: role,
+                supervisorID: localStorage.getItem('userId')
 
-            }), { headers: { 'Content-Type': 'application/json' } })
+
+                }), { headers: { 'Content-Type': 'application/json' } })
         if (response.data.respCode === 1) {
             navigate("/profile")
             props.showAlert("Succesfully Created Lineman ", "success")
@@ -78,7 +80,7 @@ function AddLineman(props) {
                     </div>
                     <div className="form-group my-4">
 
-                        <input type="number" className="form-control" id="mobileno" onChange={onChange} placeholder="Mobile No" required  />
+                        <input type="number" className="form-control" id="mobileno" onChange={onChange} placeholder="Mobile No" required />
                     </div>
 
                     <button type="submit" className="btn btn-primary" >Submit</button>

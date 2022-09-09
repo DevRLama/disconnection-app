@@ -48,6 +48,7 @@ function WorkAssign(props) {
                 }
 
             })
+            
             if(response.data.respCode===1)
             {
                 props.showAlert(response.data.respMsg,"success")
@@ -199,7 +200,7 @@ function WorkAssign(props) {
                                     }
 
                                 </select></div>
-                            <div className='col'><button type="button" className="btn btn-primary " >Submit</button></div>
+                            <div className='col'><button type="submit" className="btn btn-primary " >Submit</button></div>
 
                         </div>
 
