@@ -95,5 +95,32 @@ router.post('/assigndc', [
                 resp.send({respCode:2, respMsg:error})
             }
         })
+
+         //Route for getting report base on user Role and userId
+
+    router.get('/getreport', async (req, resp) => {
+        const role=req.query.role;
+        const userId = req.query.userId;
+        
+        if(role=='JE')
+        {
+            //const JEdata = await Disconnection.find({$and:[{"AssignedTo":{ $exists : true, $not : null }},{"AssignedBy":userId}]});
+            const JEdata = await Disconnection.find({"AssignedBy":userId});
+            resp.send({respCode:1, JEdata});
+        }
+
+        else if(role=='Lineman')
+        {
+            const linemanData = await Disconnection.find({"AssignedTo":userId});
+            resp.send({respCode:2, linemanData});
+        }
+
+        else
+        {
+            resp.send({respCode:3, respMsg:"Some error occurred"});
+        }
+        
+    });
+        
     
 module.exports = router;
