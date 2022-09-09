@@ -7,12 +7,37 @@ import { useEffect } from 'react'
 
 
 function WorkAssigned() {
-    const [data, setdata] = useState([]);
+    const [linemandcdata, setlinemandcdata] = useState([]);
     // const [linemandata, setlinemandata] = useState([])
     const [checked, setChecked] = useState([]);
     const [selected, setselected] = useState({lineman:""});
    
     
+
+
+    useEffect(() => {
+        // call api for disconnection data
+        async function fetchlinemanDC() {
+            // You can await here
+            const response = await axios({
+
+                // Endpoint to send files
+                url: "http://localhost:8080/api/dc/getlinemandc",
+                method: "GET",
+                params: {
+                    count: 100,
+                    linemanId:localStorage.getItem('userId')
+                }
+
+            })
+            setlinemandcdata(response.data.disconnectionData)
+         
+           
+        } fetchlinemanDC()
+    }, []);
+
+
+
 
 
     const handleCheck = (event) => {
@@ -41,44 +66,9 @@ function WorkAssigned() {
 
 
 
-    useEffect(() => {
-        // call api for disconnection data
-        async function fetchData() {
-            // You can await here
-            const response = await axios({
+   
 
-                // Endpoint to send files
-                url: "http://localhost:8080/api/dc/getdc",
-                method: "GET",
-                params: {
-                    count: 50
-                }
 
-            })
-            setdata(response.data.disconnectionData)
-         
-           
-        }
-
-        // //API call to populate lineman details
-        // async function fetchLineman() {
-        //     // You can await here
-        //     const response = await axios({
-
-        //         // Endpoint to send files
-        //         url: "http://localhost:8080/api/user/getlineman",
-        //         method: "GET",
-        //         params: {
-        //             userId: localStorage.getItem('userId')
-        //         }
-
-        //     })
-        //     setlinemandata(response.data.linemans)
-        //     // ...
-        // }
-        fetchData()
-        // fetchLineman()
-    }, []);
 
 
     return (
@@ -114,7 +104,7 @@ function WorkAssigned() {
                         </thead>
                         <tbody>
                             {
-                                data.map((data, i) => {
+                                linemandcdata.map((data, i) => {
                                     return (
                                         <tr >
                                             <th scope="row">{i}</th>
