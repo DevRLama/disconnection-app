@@ -127,7 +127,7 @@ function WorkAssign(props) {
                         <thead>
                             <tr >
 
-                                <th scope="col">#</th>
+                                <th scope="col">S.No.</th>
                                 <th scope='col'>  Assign</th>
                                 <th scope="col">AccountId</th>
                                 <th scope='col'>Name</th>
@@ -150,7 +150,7 @@ function WorkAssign(props) {
                                 data.map((data, i) => {
                                     return (
                                         <tr >
-                                            <th scope="row">{i}</th>
+                                            <th scope="row">{i+1}</th>
                                             <td>
                                                 <input className="form-check-input" type="checkbox" value={data.accountId} id="flexCheckDefault" onChange={handleCheck} />
                                                 <label className="form-check-label" htmlFor="flexCheckDefault">
