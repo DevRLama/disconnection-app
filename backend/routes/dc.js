@@ -105,8 +105,8 @@ router.post('/assigndc', [
         if(role=='JE')
         {
             //const JEdata = await Disconnection.find({$and:[{"AssignedTo":{ $exists : true, $not : null }},{"AssignedBy":userId}]});
-            const JEdata = await Disconnection.find({"AssignedBy":userId});
-            resp.send({respCode:1, JEdata});
+            const jeData = await Disconnection.find({"AssignedBy":userId});
+            resp.send({respCode:1, jeData});
         }
 
         else if(role=='Lineman')
