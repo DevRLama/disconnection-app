@@ -2,13 +2,54 @@ import React, { useState } from 'react'
 // import Data from './Data.js';
 import axios from 'axios';
 import { useEffect } from 'react'
+import { ExportJsonCsv } from 'react-export-json-csv';
 
 
 
 function ReportWork(props) {
     // let navigate = useNavigate()
     const [dcdata, setdcdata] = useState([]);
-
+    const headers = [
+        {
+          key: 'accountId',
+          name: 'AccountID',
+        },
+        {
+          key: 'name',
+          name: 'Name',
+        },
+        {
+            key: 'address',
+            name: 'Address',
+          },
+          {
+            key: 'dues',
+            name: 'Dues',
+          },
+          {
+            key: 'division',
+            name: 'Division',
+          },
+          {
+            key: 'subDivision',
+            name: 'Sub Division',
+          },
+          {
+            key: 'feederCode',
+            name: 'Feeder Code',
+          },
+          {
+            key: 'Remark',
+            name: 'Remark',
+          }
+      ]
+      
+      const handleExport=()=>{
+        
+        <ExportJsonCsv headers={headers} items={dcdata}>Export</ExportJsonCsv>
+      }
+      
+                                            
 
     useEffect(() => {
         // call api for disconnection data
@@ -46,7 +87,7 @@ function ReportWork(props) {
 
 
             {!localStorage.getItem('role') ? <></> : <><h3>Disconnected Consumer</h3>
-            <div className='text-right'><button type="button" class="btn btn-primary">Export CSV</button></div>
+            <div className='text-right'><button type="button" class="btn btn-primary" onClick={handleExport}>Export CSV</button></div>
                 <hr />
                 <div className='container'>
                     <table className="table table-hover " style={{ border: "1px solid black" }}>
@@ -67,7 +108,7 @@ function ReportWork(props) {
                                 <th scope="col">Billing-Basis</th>
                                 <th scope="col">Contract-Load</th>
                                 <th scope="col">Feeder-Name</th>
-                                {/* <th scope="col">Assign</th> */}
+                                <th scope="col">Remark</th>
 
                             </tr>
                         </thead>
@@ -95,6 +136,7 @@ function ReportWork(props) {
                                             <td>{data.billBasis}</td>
                                             <td>{data.contractLoad}</td>
                                             <td>{data.feederCode}</td>
+                                            <td>{data.Remark}</td>
                                             {/* <td><select name="Lineman" id="Lineman">
                                             <option value="Lineman1">Lineman 1</option>
                                             <option value="Lineman2">Lineman 2</option>

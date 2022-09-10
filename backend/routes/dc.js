@@ -87,7 +87,8 @@ router.post('/assigndc', [
             console.log(localDate)
             try {
                 const result = await Disconnection.updateMany({ accountId: { $in: accountIds } }, { $set: { CompletionDate: localDate } })
-                if (result.acknowledged) {
+                const result1=await Disconnection.updateMany({ accountId: { $in: accountIds } }, { $set: { Remark: "Disconnected" } })
+                if (result.acknowledged && result1.acknowledged) {
                     resp.send({ respCode: 1, respMsg: result.modifiedCount + " Updated successfully" });
                 }
             }

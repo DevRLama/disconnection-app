@@ -67,7 +67,8 @@ function WorkAssigned(props) {
             }), { headers: { 'Content-Type': 'application/json' } })
         if (response.data.respCode === 1) {
             props.showAlert(response.data.respMsg, "success")
-            navigate("/workAssigned")
+            window.location.reload()
+            // navigate("/workAssigned")
         } else {
             props.showAlert(response.data.respMsg, "danger")
         }
@@ -87,6 +88,7 @@ function WorkAssigned(props) {
 
 
             {!localStorage.getItem('role') ? <></> : <><h3>Assigned Work</h3>
+           
                 <hr />
                 
                  <div className='container'>
