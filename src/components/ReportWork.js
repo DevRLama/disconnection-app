@@ -2,54 +2,79 @@ import React, { useState } from 'react'
 // import Data from './Data.js';
 import axios from 'axios';
 import { useEffect } from 'react'
-import { ExportJsonCsv } from 'react-export-json-csv';
+//import { ExportJsonCsv } from 'react-export-json-csv';
+import { Parser } from 'json2csv';
 
 
 
 function ReportWork(props) {
     // let navigate = useNavigate()
     const [dcdata, setdcdata] = useState([]);
-    const headers = [
-        {
-          key: 'accountId',
-          name: 'AccountID',
-        },
-        {
-          key: 'name',
-          name: 'Name',
-        },
-        {
-            key: 'address',
-            name: 'Address',
-          },
-          {
-            key: 'dues',
-            name: 'Dues',
-          },
-          {
-            key: 'division',
-            name: 'Division',
-          },
-          {
-            key: 'subDivision',
-            name: 'Sub Division',
-          },
-          {
-            key: 'feederCode',
-            name: 'Feeder Code',
-          },
-          {
-            key: 'Remark',
-            name: 'Remark',
-          }
-      ]
-      
-      const handleExport=()=>{
-        
-        <ExportJsonCsv headers={headers} items={dcdata}>Export</ExportJsonCsv>
-      }
-      
-                                            
+    function handleClick() {
+        const fields = [
+            {
+                label: "Account_ID",
+                value: `accountId`
+            },
+            {
+                label: "Name",
+                value: `name`
+            },
+            {
+                label: "Address",
+                value: `address`
+            },
+            {
+                label: "Mobile_No",
+                value: `phone`
+            },
+            {
+                label: "Sub_Station",
+                value: `subStation`
+            },
+            {
+                label: "Feeder_Code",
+                value: `feederCode`
+            },
+            {
+                label: "Dues",
+                value: `dues`
+            },
+            {
+                label: "Assigned_To",
+                value: `AssignedTo`
+            },
+            {
+                label: "Assigned_By",
+                value: `AssignedBy`
+            },
+            {
+                label: "Assigned_Date",
+                value: `AssignedDate`
+            },
+            {
+                label: "CompletionDate",
+                value: `CompletionDate`
+            }
+        ];
+        const opts = { fields };
+        const parser = new Parser(opts);
+        const csv = parser.parse(dcdata);
+
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+
+        var downloadLink = document.createElement("a");
+        downloadLink.href = url;
+        downloadLink.download = "Report.csv";
+
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+
+    }
+
+
 
     useEffect(() => {
         // call api for disconnection data
@@ -72,7 +97,7 @@ function ReportWork(props) {
             if (response.data.respCode === 2 && localStorage.getItem('role') === "Lineman") {
                 setdcdata(response.data.linemanData)
             }
-            if(response.data.respCode===3){
+            if (response.data.respCode === 3) {
                 alert("Unable to fetch data at the moment!")
             }
 
@@ -86,29 +111,25 @@ function ReportWork(props) {
         <>
 
 
-            {!localStorage.getItem('role') ? <></> : <><h3>Disconnected Consumer</h3>
-            <div className='text-right'><button type="button" class="btn btn-primary" onClick={handleExport}>Export CSV</button></div>
+            {!localStorage.getItem('role') ? <></> : <><h3>Report Work Assigned</h3>
+                <div className='text-right'><button type="button" class="btn btn-primary" onClick={handleClick}>Export CSV</button></div>
                 <hr />
                 <div className='container'>
                     <table className="table table-hover " style={{ border: "1px solid black" }}>
                         <thead>
                             <tr >
-
                                 <th scope="col">S.No.</th>
-                                {/* <th scope='col'> Assign</th> */}
-                                <th scope="col">AccountId</th>
+                                <th scope="col">Account Id</th>
                                 <th scope='col'>Name</th>
                                 <th scope="col">Address</th>
-                                <th scope="col">Dues</th>
-                                <th scope="col">Division</th>
-                                <th scope='col'>Sub-Division</th>
-                                <th scope="col">Sub-Station</th>
-                                <th scope="col">Billing-Status</th>
                                 <th scope="col">Phone</th>
-                                <th scope="col">Billing-Basis</th>
-                                <th scope="col">Contract-Load</th>
-                                <th scope="col">Feeder-Name</th>
-                                <th scope="col">Remark</th>
+                                <th scope="col">Sub-Station</th>
+                                <th scope="col">Feeder Code</th>
+                                <th scope="col">Dues</th>
+                                <th scope='col'>Assigned To</th>
+                                <th scope='col'>Assigned By</th>
+                                <th scope='col'>Assigned Date</th>
+                                <th scope='col'>Completion Date</th>
 
                             </tr>
                         </thead>
@@ -117,32 +138,18 @@ function ReportWork(props) {
                                 dcdata.map((data, i) => {
                                     return (
                                         <tr >
-                                            <th scope="row">{i + 1}</th>
-                                            {/* <td>
-                                                <input className="form-check-input" type="checkbox" value={data.accountId} id="flexCheckDefault" onChange={handleCheck} />
-                                                <label className="form-check-label" htmlFor="flexCheckDefault">
-
-                                                </label>
-                                            </td> */}
+                                             <th scope="row">{i + 1}</th>
                                             <td>{data.accountId}</td>
                                             <td>{data.name}</td>
                                             <td>{data.address}</td>
-                                            <td>{data.dues}</td>
-                                            <td>{data.division}</td>
-                                            <td>{data.subDivision}</td>
-                                            <td>{data.subStation}</td>
-                                            <td>{data.billingStatus}</td>
                                             <td>{data.phone}</td>
-                                            <td>{data.billBasis}</td>
-                                            <td>{data.contractLoad}</td>
+                                            <td>{data.subStation}</td>
                                             <td>{data.feederCode}</td>
-                                            <td>{data.Remark}</td>
-                                            {/* <td><select name="Lineman" id="Lineman">
-                                            <option value="Lineman1">Lineman 1</option>
-                                            <option value="Lineman2">Lineman 2</option>
-                                            <option value="Lineman3">Lineman 3</option>
-                                            <option value="Lineman4">Lineman 4</option>
-                                        </select></td> */}
+                                            <td>{data.dues}</td>
+                                            <td>{data.AssignedTo}</td>
+                                            <td>{data.AssignedBy}</td>
+                                            <td>{data.AssignedDate}</td>
+                                            <td>{data.CompletionDate}</td>
                                         </tr>
 
                                     )
