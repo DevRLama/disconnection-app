@@ -2,9 +2,22 @@ const Disconnection = require('../model/Disconnection');
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const { exists } = require('../model/Disconnection');
+const multer=require("multer")
+const path=require('path')
 
 const router = express.Router();
 
+//file path for storing file on backend express
+const fileStorageEngine=multer.diskStorage({
+    destination:(req,file,cb)=>{
+        cb(null,"./data");
+    },
+    filename:(req,file,cb)=>{
+        cb(null,Date.now()+"--"+file.originalname);
+    },
+});
+
+//Route 1: To get disconnection data
 router.get('/getdc', async (req, resp) => {
     const count = req.query.count;
     if (count) {
@@ -124,6 +137,12 @@ router.post('/assigndc', [
     });
         
 
+    // Route: To submit csv file at backend
+const upload=multer({storage:fileStorageEngine});
+router.post("/single",upload.single("image"),(req,res)=>{
+    console.log(req.file);
+    res.send({respCode:1,msg:"Single file upload success"})
+});
 
     
 module.exports = router;
