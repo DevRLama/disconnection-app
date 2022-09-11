@@ -44,20 +44,20 @@ export default function Navbar(props) {
                 </div>
               </li>
               <li className="nav-item">
-                <Link className="nav-item nav-link" aria-current="page" to="/workAssignedReport">Report</Link>
+                <Link className="nav-item nav-link" aria-current="page" to="/reportGenerate">Report Work Assigned</Link>
               </li>
             </ul>
-            : <>{localStorage.getItem('role') === "Lineman" ? <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link className="nav-item nav-link" aria-current="page" to="/profile">Profile Page</Link>
+            : <>{localStorage.getItem('role')==="Lineman"? <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <Link className="nav-item nav-link" aria-current="page" to="/profile">Profile Page</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-item nav-link" aria-current="page" to="/workAssigned">Work Assigned</Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-item nav-link" aria-current="page" to="/reportGenerate">Report Work Assigned</Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-item nav-link" aria-current="page" to="/workAssigned">Work Assigned</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-item nav-link" aria-current="page" to="/workAssignedReport">Report</Link>
-              </li>
-              {/* <li className="nav-item dropdown">
+            {/* <li className="nav-item dropdown">
               <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Manage Lineman
               </Link>
@@ -84,14 +84,14 @@ export default function Navbar(props) {
                 {/* <h6 className="nav-item nav-link">Welcome : {localStorage.getItem('role')}</h6> */}
 
                 <li className="nav-item dropdown">
-                  <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Welcome : {localStorage.getItem('role')}
-                  </Link>
-                  <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                    <Link className="nav-item nav-link bg-dark " aria-current="page" to="/" onClick={handleLogOut}>Log Out</Link>
-
-                  </div>
-                </li>
+                <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Welcome : {localStorage.getItem('role')+" "+localStorage.getItem('name')}
+                </Link>
+                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                  <Link className="nav-item nav-link bg-dark " aria-current="page" to="/"onClick={handleLogOut}>Log Out</Link>
+                  
+                </div>
+              </li>               
               </ul></form>
           }
         </div>

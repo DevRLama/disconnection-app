@@ -14,7 +14,7 @@ import AddLineman from './components/AddLineman';
 import DeleteLineman from './components/DeleteLineman';
 import UpdateLineman from './components/UpdateLineman';
 import WorkAssigned from './components/WorkAssigned';
-import WorkAssignedReport from './components/WorkAssignedReport';
+import ReportWork from './components/ReportWork';
 
 
 
@@ -50,7 +50,7 @@ function App() {
             <Route exact path="/deleteLineman" element={<DeleteLineman showAlert={showAlert} />} />
             <Route exact path="/updateLineman" element={<UpdateLineman showAlert={showAlert} />} />
             <Route exact path="/workAssigned" element={<WorkAssigned showAlert={showAlert} />} />
-            <Route exact path="/workAssignedReport" element={<WorkAssignedReport showAlert={showAlert}/>} />
+            <Route exact path="/reportGenerate" element={<ReportWork showAlert={showAlert} />} />
 
             
             

@@ -87,7 +87,8 @@ router.post('/assigndc', [
             console.log(localDate)
             try {
                 const result = await Disconnection.updateMany({ accountId: { $in: accountIds } }, { $set: { CompletionDate: localDate } })
-                if (result.acknowledged) {
+                const result1=await Disconnection.updateMany({ accountId: { $in: accountIds } }, { $set: { Remark: "Disconnected" } })
+                if (result.acknowledged && result1.acknowledged) {
                     resp.send({ respCode: 1, respMsg: result.modifiedCount + " Updated successfully" });
                 }
             }
@@ -105,8 +106,8 @@ router.post('/assigndc', [
         if(role=='JE')
         {
             //const JEdata = await Disconnection.find({$and:[{"AssignedTo":{ $exists : true, $not : null }},{"AssignedBy":userId}]});
-            const JEdata = await Disconnection.find({"AssignedBy":userId});
-            resp.send({respCode:1, JEdata});
+            const jeData = await Disconnection.find({"AssignedBy":userId});
+            resp.send({respCode:1, jeData});
         }
 
         else if(role=='Lineman')
