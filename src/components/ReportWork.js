@@ -9,6 +9,7 @@ import { Parser } from 'json2csv';
 
 function ReportWork(props) {
     // let navigate = useNavigate()
+    const val=localStorage.getItem('role')
     const [dcdata, setdcdata] = useState([]);
     function handleClick() {
         const fields = [
@@ -66,7 +67,7 @@ function ReportWork(props) {
 
         var downloadLink = document.createElement("a");
         downloadLink.href = url;
-        downloadLink.download = "Report.csv";
+        downloadLink.download = "Report"+val+".csv";
 
         document.body.appendChild(downloadLink);
         downloadLink.click();
