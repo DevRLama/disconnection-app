@@ -6,6 +6,7 @@ import SignIn from './components/SignIn'
 import Navbar from './components/Navbar'
 import HomePage from './components/HomePage'
 import Alert from './components/Alert'
+import ImportData from './components/ImportData';
 
 
 import { BrowserRouter as Router, Route, Routes, } from "react-router-dom";
@@ -52,6 +53,7 @@ function App() {
             <Route exact path="/updateLineman" element={<UpdateLineman showAlert={showAlert} />} />
             <Route exact path="/workAssigned" element={<WorkAssigned showAlert={showAlert} />} />
             <Route exact path="/reportGenerate" element={<ReportWork showAlert={showAlert} />} />
+            <Route exact path="/importData" element={<ImportData showAlert={showAlert} />} />
             <Route exact path="/uploadmaster" element={<UploadMaster showAlert={showAlert}/>}/>
 
             

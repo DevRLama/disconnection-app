@@ -164,5 +164,10 @@ function renameKey(obj, oldKey, newKey) {
     delete obj[oldKey];
 }
 
+// Route: To submit csv file at backend
 
+router.post("/single",upload.single("image"),(req,res)=>{
+    console.log(req.file);
+    res.send({respCode:1,msg:"Single file upload success"})
+});
 module.exports = router;
