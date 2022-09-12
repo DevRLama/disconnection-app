@@ -4,26 +4,70 @@ import axios from 'axios'
 
 
 function ReportGenerator(props) {
-
+var Data=[]
     const handlePdf = () => {
         // Default export is a4 paper, portrait, using millimeters for units
 
-        let data=[{"Account ID":"123","Name":"dev","Address":"Lucknow","Dues":"3251","AssignedTo":"abc","AssigneBy":"def","CompletionDate":"25-06-2021"},{"Account ID":"123","Name":"dev","Address":"Lucknow","Dues":"3251","AssignedTo":"abc","AssigneBy":"def","CompletionDate":"25-06-2021"}]
+        let data = [{ AccountID: "123", Name: "dev", Address: "Lucknow", Dues: "3251", AssignedTo: "abc", AssigneBy: "def", CompletionDate: "25-06-2021" }, { AccountID: "123", Name: "dev", Address: "Lucknow", Dues: "3251", AssignedTo: "abc", AssigneBy: "def", CompletionDate: "25-06-2021" }]
 
-        
+        // let data1 = [ "123","dev", "Lucknow", "3251","abc", "def",  "25-06-2021" ]
+        // const createHeaders = (keys) => {
+        //     var result = [];
+        //     for (var i = 0;i<keys.length;i+=1){
+        //         result.push({
+        //             id:keys[i],
+        //             name:keys[i],
+        //             prompt:keys[i],
+        //             width:50,
+        //             align:"center",
+        //             padding:0
+        //         })
+        //     }
+        //     return result;
+        // }
         const doc = new jsPDF({
             orientation: "landscape",
             unit: "in",
-            format: [4, 2]
-          });
+            format: [100, 50]
+        });
+        // var headers = createHeaders(["AccountID",
+        //     "Name",
+        //     "Address",
+        //     "Dues",
+        //     "AssignedTo",
+        //     "AssignedBy",
+        //     "CompletionDate"])
+
+           
+            // data.map((Data, i) => {return[
+            // Data.AccountID,
+            // Data.Name,
+            // Data.Address,
+            // Data.Dues,
+            // Data.AssignedTo,
+            // Data.AssigneBy,
+            // Data.CompletionDate]
+
+           
+            // })
+
+        //doc.text("AccountID  Name  Address  Dues  AssignedTo    AssignedBy  CompletionDate", 1, 1);
+        
+            // data.map((data, i) => {
+            //     doc.setFontSize(100)
+            //     doc.table(1, 1, `${data.AccountID}\t${data.Name}\t${data.Address}\t${data.Dues}\t${data.AssignedTo}\t${data.AssigneBy}\t${data.CompletionDate}` + "\n")
+            // })
+            // var doc=new jsPDF({putOnlyUsedFonts:true,orientation:"landscape"});
+            data.map((data, i) => {
+                doc.setFontSize(10)
+                doc.text(1, 1, `${data.AccountID}\t${data.Name}\t${data.Address}\t${data.Dues}\t${data.AssignedTo}\t${data.AssigneBy}\t${data.CompletionDate}\n`)
+            })
+            // doc.table(1,1, data1,headers,{autoSize:true})
+            
+     
        
-          
-         //doc.text("AccountID  Name  Address  Dues  AssignedTo    AssignedBy  CompletionDate", 1, 1);
-         {data.map((data, i) => {
-            doc.text(`${data.AccountID}${data.Name}${data.Address}${data.Dues}${data.AssignedTo}${data.AssigneBy}${data.CompletionDate}`,1,1)
-          })}
-          doc.save("two-by-four.pdf");
-       
+        doc.save("two-by-four.pdf");
+
     }
 
 
@@ -59,7 +103,7 @@ function ReportGenerator(props) {
         </>
     )
 }
-    
+
 
 export default ReportGenerator
 
