@@ -29,7 +29,8 @@ function SignIn(props) {
         console.log(response)
         if (response.data.respCode === 1) {
             localStorage.setItem('userId', response.data.user.userId)
-            setprofile({ userId: response.data.user.userId, firstName: response.data.user.firstName, lastName: response.data.user.lastName, role: response.data.user.role })
+            localStorage.setItem('name',response.data.user.firstName)
+           setprofile({ userId: response.data.user.userId, firstName: response.data.user.firstName, lastName: response.data.user.lastName, role: response.data.user.role })
             document.querySelector("#OTPForm").hidden = false
             console.log("hi")
         } else {

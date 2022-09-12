@@ -25,7 +25,7 @@ export default function Navbar(props) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
 
 
-          {localStorage.getItem('role')==="JE" ?
+          {localStorage.getItem('role') === "JE" ?
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
               <li className="nav-item">
                 <Link className="nav-item nav-link" aria-current="page" to="/profile">Profile Page</Link>
@@ -45,8 +45,16 @@ export default function Navbar(props) {
                 </div>
               </li>
               <li className="nav-item">
+<<<<<<< HEAD
               <Link className="nav-item nav-link" aria-current="page" to="/pdfGenerator">Report Generation</Link>
             </li>
+=======
+                <Link className="nav-item nav-link" aria-current="page" to="/reportGenerate">Report Work Assigned</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-item nav-link" aria-current="page" to="/uploadmaster">Upload Master File</Link>
+              </li>
+>>>>>>> 981df2ee7935eb54f6be976080b7725beb6e7d50
             </ul>
             : <>{localStorage.getItem('role')==="Lineman"? <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
@@ -56,8 +64,13 @@ export default function Navbar(props) {
               <Link className="nav-item nav-link" aria-current="page" to="/workAssigned">Work Assigned</Link>
             </li>
             <li className="nav-item">
+<<<<<<< HEAD
               <Link className="nav-item nav-link" aria-current="page" to="/pdfGenerator">Report Generation</Link>
             </li>
+=======
+                <Link className="nav-item nav-link" aria-current="page" to="/reportGenerate">Report Work Assigned</Link>
+              </li>
+>>>>>>> 981df2ee7935eb54f6be976080b7725beb6e7d50
             {/* <li className="nav-item dropdown">
               <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Manage Lineman
@@ -68,7 +81,7 @@ export default function Navbar(props) {
                 <Link className="nav-item nav-link" aria-current="page" to="/updateLineman">Update Lineman</Link>
               </div>
             </li> */}
-          </ul>:<></>}</>}
+            </ul> : <></>}</>}
 
 
 
@@ -86,7 +99,7 @@ export default function Navbar(props) {
 
                 <li className="nav-item dropdown">
                 <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Welcome : {localStorage.getItem('role')}
+                Welcome : {localStorage.getItem('role')+" "+localStorage.getItem('name')}
                 </Link>
                 <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
                   <Link className="nav-item nav-link bg-dark " aria-current="page" to="/"onClick={handleLogOut}>Log Out</Link>
