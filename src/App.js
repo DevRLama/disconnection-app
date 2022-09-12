@@ -6,6 +6,7 @@ import SignIn from './components/SignIn'
 import Navbar from './components/Navbar'
 import HomePage from './components/HomePage'
 import Alert from './components/Alert'
+import ImportData from './components/ImportData';
 
 
 import { BrowserRouter as Router, Route, Routes, } from "react-router-dom";
@@ -14,7 +15,8 @@ import AddLineman from './components/AddLineman';
 import DeleteLineman from './components/DeleteLineman';
 import UpdateLineman from './components/UpdateLineman';
 import WorkAssigned from './components/WorkAssigned';
-import WorkAssignedReport from './components/WorkAssignedReport';
+import ReportWork from './components/ReportWork';
+import UploadMaster from './components/UploadMaster';
 
 
 
@@ -50,7 +52,9 @@ function App() {
             <Route exact path="/deleteLineman" element={<DeleteLineman showAlert={showAlert} />} />
             <Route exact path="/updateLineman" element={<UpdateLineman showAlert={showAlert} />} />
             <Route exact path="/workAssigned" element={<WorkAssigned showAlert={showAlert} />} />
-            <Route exact path="/workAssignedReport" element={<WorkAssignedReport showAlert={showAlert} />} />
+            <Route exact path="/reportGenerate" element={<ReportWork showAlert={showAlert} />} />
+            <Route exact path="/importData" element={<ImportData showAlert={showAlert} />} />
+            <Route exact path="/uploadmaster" element={<UploadMaster showAlert={showAlert}/>}/>
 
             
             

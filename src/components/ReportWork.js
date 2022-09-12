@@ -1,73 +1,74 @@
-import React, { useState, useEffect } from 'react'
-import { Link} from 'react-router-dom';
+import React, { useState } from 'react'
+// import Data from './Data.js';
 import axios from 'axios';
-import {Parser} from 'json2csv';
+import { useEffect } from 'react'
+//import { ExportJsonCsv } from 'react-export-json-csv';
+import { Parser } from 'json2csv';
 
 
-function WorkAssignedReport(props) {
 
-    const [data, setdata] = useState([]);
-
-    
-
+function ReportWork(props) {
+    // let navigate = useNavigate()
+    const val=localStorage.getItem('role')
+    const [dcdata, setdcdata] = useState([]);
     function handleClick() {
         const fields = [
             {
-                label:"Account_ID",
-                value:`accountId`
+                label: "Account_ID",
+                value: `accountId`
             },
             {
-                label:"Name",
-                value:`name`
+                label: "Name",
+                value: `name`
             },
             {
-                label:"Address",
-                value:`address`
+                label: "Address",
+                value: `address`
             },
             {
-                label:"Mobile_No",
-                value:`phone`
+                label: "Mobile_No",
+                value: `phone`
             },
             {
-                label:"Sub_Station",
-                value:`subStation`
+                label: "Sub_Station",
+                value: `subStation`
             },
             {
-                label:"Feeder_Code",
-                value:`feederCode`
+                label: "Feeder_Code",
+                value: `feederCode`
             },
             {
-                label:"Dues",
-                value:`dues`
+                label: "Dues",
+                value: `dues`
             },
             {
-                label:"Assigned_To",
-                value:`AssignedTo`
+                label: "Assigned_To",
+                value: `AssignedTo`
             },
             {
-                label:"Assigned_By",
-                value:`AssignedBy`
+                label: "Assigned_By",
+                value: `AssignedBy`
             },
             {
-                label:"Assigned_Date",
-                value:`AssignedDate`
+                label: "Assigned_Date",
+                value: `AssignedDate`
             },
             {
-                label:"CompletionDate",
-                value:`CompletionDate`
+                label: "CompletionDate",
+                value: `CompletionDate`
             }
         ];
         const opts = { fields };
         const parser = new Parser(opts);
-        const csv = parser.parse(data);
+        const csv = parser.parse(dcdata);
 
         const blob = new Blob([csv], { type: 'text/csv' });
         const url = window.URL.createObjectURL(blob);
 
         var downloadLink = document.createElement("a");
         downloadLink.href = url;
-        downloadLink.download = "Report.csv";
-    
+        downloadLink.download = "Report"+val+".csv";
+
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);
@@ -76,13 +77,9 @@ function WorkAssignedReport(props) {
 
 
 
-
     useEffect(() => {
-        // call api for data
+        // call api for disconnection data
         async function fetchData() {
-            const role = localStorage.getItem('role');
-            const userId = localStorage.getItem('userId')
-            console.log()
             // You can await here
             const response = await axios({
 
@@ -90,33 +87,38 @@ function WorkAssignedReport(props) {
                 url: "http://localhost:8080/api/dc/getreport",
                 method: "GET",
                 params: {
-                    role: role,
-                    userId: userId
+                    userId: localStorage.getItem('userId'),
+                    role: localStorage.getItem('role')
                 }
 
             })
-            if (role === "JE") {
-                setdata(response.data.JEdata);
+            if (response.data.respCode === 1 && localStorage.getItem('role') === "JE") {
+                setdcdata(response.data.jeData)
             }
-            else {
-                setdata(response.data.linemanData);
+            if (response.data.respCode === 2 && localStorage.getItem('role') === "Lineman") {
+                setdcdata(response.data.linemanData)
             }
-        }
+            if (response.data.respCode === 3) {
+                alert("Unable to fetch data at the moment!")
+            }
 
+
+        }
         fetchData()
     }, []);
 
 
     return (
         <>
-            {!localStorage.getItem('role') ? <></> : <><h3>Report</h3>
+
+
+            {!localStorage.getItem('role') ? <></> : <><h3>Report Work Assigned</h3>
+                <div className='text-right'><button type="button" class="btn btn-primary" onClick={handleClick}>Export CSV</button></div>
                 <hr />
-                
                 <div className='container'>
-                <button className="btn btn-primary" type="button" onClick={handleClick} style={{marginBottom:"10px"}}>Download Report</button>
-                    <table className="table table-hover table-striped " style={{ border: "1px solid black" }} id="reportTable">
+                    <table className="table table-hover " style={{ border: "1px solid black" }}>
                         <thead>
-                            <tr className=''>
+                            <tr >
                                 <th scope="col">S.No.</th>
                                 <th scope="col">Account Id</th>
                                 <th scope='col'>Name</th>
@@ -129,14 +131,15 @@ function WorkAssignedReport(props) {
                                 <th scope='col'>Assigned By</th>
                                 <th scope='col'>Assigned Date</th>
                                 <th scope='col'>Completion Date</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                data.map((data, i) => {
+                                dcdata.map((data, i) => {
                                     return (
                                         <tr >
-                                            <th scope="row">{i + 1}</th>
+                                             <th scope="row">{i + 1}</th>
                                             <td>{data.accountId}</td>
                                             <td>{data.name}</td>
                                             <td>{data.address}</td>
@@ -155,17 +158,12 @@ function WorkAssignedReport(props) {
                             }
                         </tbody>
                     </table>
-
-
-
-                </div></>}
-
-
-
+                </div></>
+            }
 
         </>
 
     )
 }
 
-export default WorkAssignedReport
+export default ReportWork

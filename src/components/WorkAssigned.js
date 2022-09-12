@@ -67,7 +67,8 @@ function WorkAssigned(props) {
             }), { headers: { 'Content-Type': 'application/json' } })
         if (response.data.respCode === 1) {
             props.showAlert(response.data.respMsg, "success")
-            navigate("/workAssigned")
+            window.location.reload()
+            // navigate("/workAssigned")
         } else {
             props.showAlert(response.data.respMsg, "danger")
         }
@@ -87,6 +88,7 @@ function WorkAssigned(props) {
 
 
             {!localStorage.getItem('role') ? <></> : <><h3>Assigned Work</h3>
+           
                 <hr />
                 
                  <div className='container'>
@@ -94,7 +96,7 @@ function WorkAssigned(props) {
                         <thead>
                             <tr className=''>
 
-                                <th scope="col">#</th>
+                                <th scope="col">S.No.</th>
                                 <th scope='col'>Disconnected</th>
                                 <th scope="col">AccountId</th>
                                 <th scope='col'>Name</th>
@@ -118,7 +120,7 @@ function WorkAssigned(props) {
                                 linemandcdata.map((data, i) => {
                                     return (
                                         <tr >
-                                            <th scope="row">{i}</th>
+                                            <th scope="row">{i+1}</th>
                                             <td>
                                                 <input className="form-check-input" type="checkbox" value={data.accountId} id="flexCheckDefault" onChange={handleCheck} />
                                                 <label className="form-check-label" htmlFor="flexCheckDefault">
@@ -137,6 +139,7 @@ function WorkAssigned(props) {
                                             <td>{data.billBasis}</td>
                                             <td>{data.contractLoad}</td>
                                             <td>{data.feederCode}</td>
+                                            <td></td>
                                             {/* <td><input id="remark" type="text" class="form-control" placeholder="Remark" onChange={onChange} /></td> */}
 
                                             {/* <td><select name="Lineman" id="Lineman">

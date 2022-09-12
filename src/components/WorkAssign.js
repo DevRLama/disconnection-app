@@ -32,7 +32,7 @@ function WorkAssign(props) {
 
 
     const handleworkSubmit = async (e) => {
-       // e.preventDefault();
+        // e.preventDefault();
 
 
 
@@ -88,7 +88,11 @@ function WorkAssign(props) {
                 }
 
             })
-            setdata(response.data.disconnectionData)
+            if (response.data.respCode === 1) {
+                setdata(response.data.disconnectionData)
+            } else {
+               alert("Unable to fetch the data at this moment")
+            }
 
 
         }
@@ -106,8 +110,12 @@ function WorkAssign(props) {
                 }
 
             })
-            setlinemandata(response.data.linemans)
-            // ...
+            if (response.data.respCode === 1) {
+                setlinemandata(response.data.linemans)
+            } else {
+                alert("Unable to fetch the linman at this moment")
+            }
+            
         }
         fetchData()
         fetchLineman()
@@ -127,7 +135,7 @@ function WorkAssign(props) {
                         <thead>
                             <tr >
 
-                                <th scope="col">#</th>
+                                <th scope="col">S.No.</th>
                                 <th scope='col'>  Assign</th>
                                 <th scope="col">AccountId</th>
                                 <th scope='col'>Name</th>
@@ -150,7 +158,7 @@ function WorkAssign(props) {
                                 data.map((data, i) => {
                                     return (
                                         <tr >
-                                            <th scope="row">{i}</th>
+                                            <th scope="row">{i + 1}</th>
                                             <td>
                                                 <input className="form-check-input" type="checkbox" value={data.accountId} id="flexCheckDefault" onChange={handleCheck} />
                                                 <label className="form-check-label" htmlFor="flexCheckDefault">
