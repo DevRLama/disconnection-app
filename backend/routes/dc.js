@@ -13,7 +13,8 @@ let csvToJson = require('convert-csv-to-json');
 
 
 
-const upload = multer({ dest: 'uploads/' })
+const uploaddata = multer({ dest: 'uploads/' })
+
 
 router.get('/getdc', async (req, resp) => {
     const count = req.query.count;
@@ -131,7 +132,7 @@ router.get('/getreport', async (req, resp) => {
 });
 
 //Route update lineman disconnection data
-router.post('/uploaddc', upload.single('file'), async (req, resp) => {
+router.post('/uploaddc', uploaddata.single('file'), async (req, resp) => {
     var array = [];
     let fileInputName = req.file.path;
     let json = csvToJson.fieldDelimiter(',').getJsonFromCsv(fileInputName);
@@ -205,6 +206,16 @@ function renameKey(obj, oldKey, newKey) {
 }
 
 // Route: To submit image file at backend
+
+const fileStorageEngine=multer.diskStorage({
+    destination:(req,file,cb)=>{
+        cb(null,"./images");
+    },
+    filename:(req,file,cb)=>{
+        cb(null,Date.now()+"--"+file.originalname);
+    },
+});
+const upload=multer({storage:fileStorageEngine});
 
 router.post("/single", upload.single("image"), (req, res) => {
     console.log(req.file);
