@@ -16,7 +16,7 @@ const disconnectionSchema = mongoose.Schema({
     },
 
     dues:{
-        type:Number,
+        type:String,
         //required:true
     },
 
@@ -33,9 +33,9 @@ const disconnectionSchema = mongoose.Schema({
         type:String
     },
 
-    feeder:{
-        type:String
-    },
+    // feeder:{
+    //     type:String
+    // },
 
     billingStatus:{
         type:String
@@ -50,18 +50,18 @@ const disconnectionSchema = mongoose.Schema({
     },
 
     contractLoad:{
-        type:Number
+        type:String
     },
     feederCode:{
         type:String
-    },
-    AssignedTo: { 
-        type: String
     },
     AssignedBy: {
         type: String
     },
     AssignedDate: {
+        type: String
+    },
+    AssignedTo: { 
         type: String
     },
     CompletionDate: {

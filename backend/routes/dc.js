@@ -7,6 +7,12 @@ const router = express.Router();
 const multer = require('multer');
 const csv = require('csvtojson')
 
+
+let csvToJson = require('convert-csv-to-json');
+
+
+
+
 const upload = multer({ dest: 'uploads/' })
 
 router.get('/getdc', async (req, resp) => {
@@ -126,36 +132,71 @@ router.get('/getreport', async (req, resp) => {
 
 //Route update lineman disconnection data
 router.post('/uploaddc', upload.single('file'), async (req, resp) => {
-    csv({
-        // noheader: false,
-        // headers: ['division','subDivision','subStation','feeder','address','name','phone','billBasis','contractLoad','billingStatus','accountId','dues'],
-        includeColumns: /(^DIVISION$)|(^SUBDIVISION$)|(^SUBSTATION$)|(^FEEDER$)|(^ADDRESS1$)|(^NAME$)|(^PHONE$)|(^BILLBASIS$)|(^CONTRACTLOAD$)|(^BILLING_STATUS$)|(^ACCOUNTNO$)|(^ARREAR$)/
+    var array = [];
+    let fileInputName = req.file.path;
+    let fileOutputName = 'myOutputFile.json';
+    let json = csvToJson.fieldDelimiter(',').getJsonFromCsv(fileInputName);
+    console.log(json.length)
+    for (let i = 0; i < json.length; i++) {
+        var object = {
+            accountId: json[i].accountId,
+            name: json[i].name,
+            address: json[i].address,
+            dues: json[i].dues,
+            division: json[i].division,
+            subDivision: json[i].subDivision,
+            subStation: json[i].subStation,
+            billingStatus: json[i].billingStatus,
+            phone: json[i].phone,
+            billBasis: json[i].billBasis,
+            contractLoad: json[i].contractLoad,
+            feederCode: json[i].feederCode,
+            AssignedBy: "",
+            AssignedDate:"",
+            AssignedTo: "",
+            CompletionDate: "",
+            Remark: ""
+        }
+        array.push(object);
 
-    })
-        .fromFile(req.file.path)
-        .then((jsonObj) => {
-            jsonObj.forEach(obj => {
-                renameKey(obj, 'ACCOUNTNO', 'accountId');
-                renameKey(obj, 'NAME', 'name');
-                renameKey(obj, 'ADDRESS1', 'address');
-                renameKey(obj, 'ARREAR', 'dues');
-                renameKey(obj, 'DIVISION', 'division');
-                renameKey(obj, 'SUBDIVISION', 'subDivision');
-                renameKey(obj, 'SUBSTATION', 'subStation');
-                renameKey(obj, 'FEEDER', 'feeder');
-                renameKey(obj, 'BILLING_STATUS', 'billingStatus');
-                renameKey(obj, 'PHONE', 'phone');
-                renameKey(obj, 'BILLBASIS', 'billBasis');
-                renameKey(obj, 'CONTRACTLOAD', 'contractLoad');
-            });
-            console.log(jsonObj);
-            Disconnection.insertMany(jsonObj).then(function (docs) {
-                resp.send({respCode:1, respMsg:"Records inserted Successfully"})  // Success
-            }).catch(function (error) {
-                resp.send({respCode:2, respMsg:error});      // Failure
-            });
+    }
 
-        });
+    // console.log(json[i].accountId);
+
+    var myJSONString = JSON.stringify(array);
+    console.log(myJSONString)
+    // csv({
+    //     // noheader: false,
+    //     // headers: ['division','subDivision','subStation','feeder','address','name','phone','billBasis','contractLoad','billingStatus','accountId','dues'],
+    //     includeColumns: /(^DIVISION$)|(^SUBDIVISION$)|(^SUBSTATION$)|(^FEEDER$)|(^ADDRESS1$)|(^NAME$)|(^PHONE$)|(^BILLBASIS$)|(^CONTRACTLOAD$)|(^BILLING_STATUS$)|(^ACCOUNTNO$)|(^ARREAR$)/
+
+    // })
+
+    // console.log(req.file.path)
+    // .fromFile(req.file.path)
+    // .then((jsonObj) => {
+    //     jsonObj.forEach(obj => {
+    //         renameKey(obj, 'ACCOUNTNO', 'accountId');
+    //         renameKey(obj, 'NAME', 'name');
+    //         renameKey(obj, 'ADDRESS1', 'address');
+    //         renameKey(obj, 'ARREAR', 'dues');
+    //         renameKey(obj, 'DIVISION', 'division');
+    //         renameKey(obj, 'SUBDIVISION', 'subDivision');
+    //         renameKey(obj, 'SUBSTATION', 'subStation');
+    //         renameKey(obj, 'FEEDER', 'feeder');
+    //         renameKey(obj, 'BILLING_STATUS', 'billingStatus');
+    //         renameKey(obj, 'PHONE', 'phone');
+    //         renameKey(obj, 'BILLBASIS', 'billBasis');
+    //         renameKey(obj, 'CONTRACTLOAD', 'contractLoad');
+    //     });
+    //     console.log(jsonObj);
+    Disconnection.insertMany(myJSONString).then(function (docs) {
+        resp.send({ respCode: 1, respMsg: "Records inserted Successfully" })  // Success
+    }).catch(function (error) {
+        resp.send({ respCode: 2, respMsg: error });      // Failure
+    });
+
+    // });
 
 })
 
@@ -164,10 +205,10 @@ function renameKey(obj, oldKey, newKey) {
     delete obj[oldKey];
 }
 
-// Route: To submit csv file at backend
+// Route: To submit image file at backend
 
-router.post("/single",upload.single("image"),(req,res)=>{
+router.post("/single", upload.single("image"), (req, res) => {
     console.log(req.file);
-    res.send({respCode:1,msg:"Single file upload success"})
+    res.send({ respCode: 1, msg: "Single file upload success" })
 });
 module.exports = router;
