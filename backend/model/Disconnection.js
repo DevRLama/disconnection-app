@@ -8,7 +8,7 @@ const disconnectionSchema = mongoose.Schema({
 
     name:{
         type:String,
-        required:true
+        //required:true
     },
 
     address:{
@@ -17,12 +17,12 @@ const disconnectionSchema = mongoose.Schema({
 
     dues:{
         type:Number,
-        required:true
+        //required:true
     },
 
     division:{
         type:String,
-        required:true
+        //required:true
     },
 
     subDivision:{

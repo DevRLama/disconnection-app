@@ -152,7 +152,7 @@ router.get('/getlineman',async (req,resp)=>{
     const userId = req.query.userId;
     if(userId){
         try{
-            let linemans = await User.find({supervisorID:userId});
+            let linemans = await User.find({$and:[{supervisorID:userId},{isDeleted:false}]});
             resp.send({ respCode: 1, linemans});
         }
         catch(error){

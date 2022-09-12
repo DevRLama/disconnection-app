@@ -15,6 +15,7 @@ import DeleteLineman from './components/DeleteLineman';
 import UpdateLineman from './components/UpdateLineman';
 import WorkAssigned from './components/WorkAssigned';
 import ReportWork from './components/ReportWork';
+import UploadMaster from './components/UploadMaster';
 
 
 
@@ -51,7 +52,7 @@ function App() {
             <Route exact path="/updateLineman" element={<UpdateLineman showAlert={showAlert} />} />
             <Route exact path="/workAssigned" element={<WorkAssigned showAlert={showAlert} />} />
             <Route exact path="/reportGenerate" element={<ReportWork showAlert={showAlert} />} />
-          
+            <Route exact path="/uploadmaster" element={<UploadMaster showAlert={showAlert}/>}/>
 
             
             
