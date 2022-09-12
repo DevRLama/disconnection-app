@@ -25,11 +25,11 @@ var Data=[]
         //     }
         //     return result;
         // }
-        const doc = new jsPDF({
-            orientation: "landscape",
-            unit: "in",
-            format: [100, 50]
-        });
+        // const doc = new jsPDF({
+        //     orientation: "landscape",
+        //     unit: "in",
+        //     format: [100, 50]
+        // });
         // var headers = createHeaders(["AccountID",
         //     "Name",
         //     "Address",
