@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 function WorkAssigned(props) {
-    let navigate=useNavigate()
+    // let navigate=useNavigate()
     const [linemandcdata, setlinemandcdata] = useState([]);
   
     const [checked, setChecked] = useState([]);
