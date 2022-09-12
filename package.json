@@ -8,11 +8,11 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
-<<<<<<< HEAD
+
     "jspdf": "^2.5.1",
-=======
+
     "json2csv": "^5.0.7",
->>>>>>> 981df2ee7935eb54f6be976080b7725beb6e7d50
+
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-export-json-csv": "^1.0.1-3.1",

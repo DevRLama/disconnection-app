@@ -164,7 +164,7 @@ router.post('/uploaddc', upload.single('file'), async (req, resp) => {
     // console.log(json[i].accountId);
 
     var myJSONString = JSON.stringify(array);
-    console.log(myJSONString)
+    console.log(array)
     // csv({
     //     // noheader: false,
     //     // headers: ['division','subDivision','subStation','feeder','address','name','phone','billBasis','contractLoad','billingStatus','accountId','dues'],
@@ -190,7 +190,7 @@ router.post('/uploaddc', upload.single('file'), async (req, resp) => {
     //         renameKey(obj, 'CONTRACTLOAD', 'contractLoad');
     //     });
     //     console.log(jsonObj);
-    Disconnection.insertMany(myJSONString).then(function (docs) {
+    Disconnection.insertMany(array).then(function (docs) {
         resp.send({ respCode: 1, respMsg: "Records inserted Successfully" })  // Success
     }).catch(function (error) {
         resp.send({ respCode: 2, respMsg: error });      // Failure

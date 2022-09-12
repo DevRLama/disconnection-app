@@ -67,11 +67,9 @@ function WorkAssigned(props) {
             }), { headers: { 'Content-Type': 'application/json' } })
         if (response.data.respCode === 1) {
             props.showAlert(response.data.respMsg, "success")
-<<<<<<< HEAD
             window.location.reload();
-=======
-            window.location.reload()
->>>>>>> 981df2ee7935eb54f6be976080b7725beb6e7d50
+
+
             // navigate("/workAssigned")
         } else {
             props.showAlert(response.data.respMsg, "danger")
