@@ -44,10 +44,7 @@ export default function Navbar(props) {
                   <Link className="nav-item nav-link bg-dark " aria-current="page" to="/updateLineman">Update Lineman</Link>
                 </div>
               </li>
-              <li className="nav-item">
-
-              <Link className="nav-item nav-link" aria-current="page" to="/pdfGenerator">Report Generation</Link>
-            </li>
+             
             <li>
 
                 <Link className="nav-item nav-link" aria-current="page" to="/reportGenerate">Report Work Assigned</Link>
@@ -63,10 +60,7 @@ export default function Navbar(props) {
             <li className="nav-item">
               <Link className="nav-item nav-link" aria-current="page" to="/workAssigned">Work Assigned</Link>
             </li>
-            <li className="nav-item">
-
-              <Link className="nav-item nav-link" aria-current="page" to="/pdfGenerator">Report Generation</Link>
-            </li>
+            
             <li>
 
                 <Link className="nav-item nav-link" aria-current="page" to="/reportGenerate">Report Work Assigned</Link>
