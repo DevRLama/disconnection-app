@@ -134,7 +134,6 @@ router.get('/getreport', async (req, resp) => {
 router.post('/uploaddc', upload.single('file'), async (req, resp) => {
     var array = [];
     let fileInputName = req.file.path;
-    let fileOutputName = 'myOutputFile.json';
     let json = csvToJson.fieldDelimiter(',').getJsonFromCsv(fileInputName);
     console.log(json.length)
     for (let i = 0; i < json.length; i++) {
@@ -163,8 +162,8 @@ router.post('/uploaddc', upload.single('file'), async (req, resp) => {
 
     // console.log(json[i].accountId);
 
-    var myJSONString = JSON.stringify(array);
-    console.log(array)
+    // var myJSONString = JSON.stringify(array);
+    // console.log(array)
     // csv({
     //     // noheader: false,
     //     // headers: ['division','subDivision','subStation','feeder','address','name','phone','billBasis','contractLoad','billingStatus','accountId','dues'],
