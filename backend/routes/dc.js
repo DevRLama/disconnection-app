@@ -18,7 +18,7 @@ const upload = multer({ dest: 'uploads/' })
 router.get('/getdc', async (req, resp) => {
     const count = req.query.count;
     if (count) {
-        const disconnectionData = await Disconnection.find({ $and: [{ $or: [{ "billingStatus": "Live" }, { "billingStatus": "First Bill Issued" }, { "billingStatus": "New Connection" }] }, { "AssignedTo": null }] })
+        const disconnectionData = await Disconnection.find({ $and: [{ $or: [{ "billingStatus": "Live" }, { "billingStatus": "First Bill Issued" }, { "billingStatus": "New Connection" }] }, { "AssignedTo": "" }] })
             .limit(count);
 
         resp.send({ respCode: 1, disconnectionData });
