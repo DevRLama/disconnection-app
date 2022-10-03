@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import Lineman from './Lineman'
 
 
 
@@ -44,7 +45,8 @@ function AddLineman(props) {
 
                 }), { headers: { 'Content-Type': 'application/json' } })
         if (response.data.respCode === 1) {
-            navigate("/profile")
+            //navigate("/profile")
+            window.location.reload();
             props.showAlert("Succesfully Created Lineman ", "success")
         } else {
             props.showAlert(response.data.respMsg, "danger")
@@ -66,8 +68,10 @@ function AddLineman(props) {
         <>
 
             {!localStorage.getItem('role') ? <></> : <div className="container">
+                <Lineman></Lineman>
                 <div ><h3>Add Lineman</h3></div>
                 <div><hr /></div>
+                
 
                 <form onSubmit={handleSubmit}>
                     <div className="form-group my-4">

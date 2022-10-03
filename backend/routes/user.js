@@ -2,11 +2,22 @@ const user = require('../model/User');
 const express = require('express');
 const User = require('../model/User');
 const { body, validationResult } = require('express-validator');
+const nodemailer = require('nodemailer');
 
 
 const router = express.Router();
 
 router.get('/getotp', async (req, resp) => {
+    const transporter =nodemailer.createTransport({
+        port:465,
+        host:"smtp.gmail.com",
+        auth:{
+            user:"",
+            pass:""
+        },
+        secure:true,
+    })
+
     const userId = req.query.mobileno;
     console.log(userId);
     if (userId) {
@@ -19,8 +30,20 @@ router.get('/getotp', async (req, resp) => {
             user.otp = otp;
             otpUpdateResp = await User.updateOne({ userId }, { otp: otp });
             if (otpUpdateResp.acknowledged) {
-                console.log(user);
-                resp.send({ respCode: 1, user: user });
+                const mailData = {
+                    from:'',
+                    to:'',
+                    subject:'Test App OTP',
+                    text:'Test OTP for my test APP',
+                    html:`Your OTP is :- <b>${otp}</b>`
+                };
+
+                transporter.sendMail(mailData,function(err,info){
+                    if(err){
+                        resp.status(500).send('Mail Failed');
+                    }
+                    resp.send({ respCode: 1, user: user });
+                });
             }
             else {
                 resp.send({ respCode: 4, respMsg: "Error creating otp" });
