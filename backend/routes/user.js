@@ -3,21 +3,12 @@ const express = require('express');
 const User = require('../model/User');
 const nodemailer=require('nodemailer')
 const { body, validationResult } = require('express-validator');
-const nodemailer = require('nodemailer');
 
 
 const router = express.Router();
 
 router.get('/getotp', async (req, resp) => {
-    const transporter =nodemailer.createTransport({
-        port:465,
-        host:"smtp.gmail.com",
-        auth:{
-            user:"",
-            pass:""
-        },
-        secure:true,
-    })
+    
 
     const userId = req.query.mobileno;
 
