@@ -1,6 +1,7 @@
 const user = require('../model/User');
 const express = require('express');
 const User = require('../model/User');
+const nodemailer=require('nodemailer')
 const { body, validationResult } = require('express-validator');
 
 
@@ -8,6 +9,18 @@ const router = express.Router();
 
 router.get('/getotp', async (req, resp) => {
     const userId = req.query.mobileno;
+
+    //Configuration for OTP on email
+    const transporter=nodemailer.createTransport({
+        port:465,
+        host:"smtp.gmail.com",
+        auth:{
+            user:"", //Account ID from which email is to be sent
+            pass:'' //App password of Google Account
+        },
+        secure:true,
+    });
+
     console.log(userId);
     if (userId) {
 
@@ -17,9 +30,28 @@ router.get('/getotp', async (req, resp) => {
             //create otp and save to database
             const otp = Math.floor(1000 + Math.random() * 9000);
             user.otp = otp;
-            otpUpdateResp = await User.updateOne({ userId }, { otp: otp });
+            otpUpdateResp = await User.updateOne({ userId }, { otp: otp }); // Saving OTP in database for verify purpose.
             if (otpUpdateResp.acknowledged) {
                 console.log(user);
+                // OTP created will be sent to user through email
+                const mailData={
+                    from:'',
+                    to:'',
+                    subject:'Test App OTP',
+                    text:'Test OTP for my test App',
+                    html:`Your OTP for login is :- <b>${otp}</b>`
+                };
+
+                transporter.sendMail(mailData,function(err,info){
+                    if(err){
+                        resp.status(500).send('Mail Failed')
+                    }else{
+                        resp.status(200).send('OTP sent successfully.')
+                    }
+                })
+
+
+
                 resp.send({ respCode: 1, user: user });
             }
             else {
@@ -165,6 +197,25 @@ router.get('/getlineman',async (req,resp)=>{
     
 })
 
+
+// Get user
+
+router.get('/getuserDetail',async (req,resp)=>{
+    const userId = req.query.mobileno;
+    if(userId){
+        try{
+            let user = await User.findOne({userId:userId}).select("-otp");
+            resp.send({ respCode: 1, user});
+        }
+        catch(error){
+            resp.send({ respCode: 2, respMsg: "Error fetching user data" });
+        }
+    }
+    else {
+        resp.send({ respCode: 3, respMsg: "userId is required" });
+    }
+    
+})
 
 
 module.exports = router;

@@ -38,7 +38,7 @@ export default function Navbar(props) {
                 <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Manage Lineman
                 </Link>
-                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                <div className="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
                   <Link className="nav-item nav-link bg-dark " aria-current="page" to="/addLineman">Add Lineman</Link>
                   <Link className="nav-item nav-link bg-dark " aria-current="page" to="/deleteLineman">Delete Lineman</Link>
                   <Link className="nav-item nav-link bg-dark " aria-current="page" to="/updateLineman">Update Lineman</Link>
@@ -69,7 +69,7 @@ export default function Navbar(props) {
               <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Manage Lineman
               </Link>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <Link className="nav-item nav-link" aria-current="page" to="/addLineman">Add Lineman</Link>
                 <Link className="nav-item nav-link" aria-current="page" to="/deleteLineman">Delete Lineman</Link>
                 <Link className="nav-item nav-link" aria-current="page" to="/updateLineman">Update Lineman</Link>
@@ -95,7 +95,7 @@ export default function Navbar(props) {
                 <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Welcome : {localStorage.getItem('role')+" "+localStorage.getItem('name')}
                 </Link>
-                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                <div className="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
                   <Link className="nav-item nav-link bg-dark " aria-current="page" to="/"onClick={handleLogOut}>Log Out</Link>
                   
                 </div>
