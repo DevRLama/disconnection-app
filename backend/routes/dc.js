@@ -13,12 +13,13 @@ let csvToJson = require('convert-csv-to-json');
 
 
 
-const upload = multer({ dest: 'uploads/' })
+const uploaddata = multer({ dest: 'uploads/' })
+
 
 router.get('/getdc', async (req, resp) => {
     const count = req.query.count;
     if (count) {
-        const disconnectionData = await Disconnection.find({ $and: [{ $or: [{ "billingStatus": "Live" }, { "billingStatus": "First Bill Issued" }, { "billingStatus": "New Connection" }] }, { "AssignedTo": null }] })
+        const disconnectionData = await Disconnection.find({ $and: [{ $or: [{ "billingStatus": "Live" }, { "billingStatus": "First Bill Issued" }, { "billingStatus": "New Connection" }] }, { "AssignedTo": "" }] })
             .limit(count);
 
         resp.send({ respCode: 1, disconnectionData });
@@ -131,10 +132,9 @@ router.get('/getreport', async (req, resp) => {
 });
 
 //Route update lineman disconnection data
-router.post('/uploaddc', upload.single('file'), async (req, resp) => {
+router.post('/uploaddc', uploaddata.single('file'), async (req, resp) => {
     var array = [];
     let fileInputName = req.file.path;
-    let fileOutputName = 'myOutputFile.json';
     let json = csvToJson.fieldDelimiter(',').getJsonFromCsv(fileInputName);
     console.log(json.length)
     for (let i = 0; i < json.length; i++) {
@@ -163,8 +163,8 @@ router.post('/uploaddc', upload.single('file'), async (req, resp) => {
 
     // console.log(json[i].accountId);
 
-    var myJSONString = JSON.stringify(array);
-    console.log(array)
+    // var myJSONString = JSON.stringify(array);
+    // console.log(array)
     // csv({
     //     // noheader: false,
     //     // headers: ['division','subDivision','subStation','feeder','address','name','phone','billBasis','contractLoad','billingStatus','accountId','dues'],
@@ -206,6 +206,16 @@ function renameKey(obj, oldKey, newKey) {
 }
 
 // Route: To submit image file at backend
+
+const fileStorageEngine=multer.diskStorage({
+    destination:(req,file,cb)=>{
+        cb(null,"./images");
+    },
+    filename:(req,file,cb)=>{
+        cb(null,Date.now()+"--"+file.originalname);
+    },
+});
+const upload=multer({storage:fileStorageEngine});
 
 router.post("/single", upload.single("image"), (req, res) => {
     console.log(req.file);

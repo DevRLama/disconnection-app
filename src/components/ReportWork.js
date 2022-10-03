@@ -56,6 +56,10 @@ function ReportWork(props) {
             {
                 label: "CompletionDate",
                 value: `CompletionDate`
+            },
+            {
+                label:"Remark",
+                value:`Remark`
             }
         ];
         const opts = { fields };

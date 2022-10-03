@@ -141,7 +141,8 @@ function WorkAssigned(props) {
                                             <td>{data.billBasis}</td>
                                             <td>{data.contractLoad}</td>
                                             <td>{data.feederCode}</td>
-                                            <td></td>
+                                          
+                                           
                                             {/* <td><input id="remark" type="text" class="form-control" placeholder="Remark" onChange={onChange} /></td> */}
 
                                             {/* <td><select name="Lineman" id="Lineman">

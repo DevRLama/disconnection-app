@@ -19,7 +19,7 @@ class HomePage extends React.Component {
         axios({
 
             // Endpoint to send files
-            url: "http://localhost:8080/api/user/getotp",
+            url: "http://localhost:8080/api/user/getuserDetail",
             method: "GET",
             params: {
                 mobileno: localStorage.getItem('userId')
